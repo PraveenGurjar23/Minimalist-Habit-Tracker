@@ -1,9 +1,20 @@
-Beyond the code, this project is designed to bridge the gap between intention and action. By transforming abstract goals into visual data, it reduces the 'cognitive load' and anxiety often associated with habit formation, effectively removing the frustration of lost progress. It replaces inconsistency with a sense of 'Logical Assertiveness,' helping users reclaim their time and build a more disciplined, positive lifestyle through clear, incremental achievements. <br>
-
 🚀 HabitWork: Personal Growth Analytics<br>
 "Build habits that actually stick."<br>
 <sub>A high-performance, privacy-focused utility built to help users master their daily routines through visual data and gamified logic.</sub> <br>
 🔗 Launch Live App → <br>
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+<h1>🌟 Positive Impact & Human-Centric Design</h1>
+This project goes beyond simple code to address the psychological barriers of habit formation:
+
+Bridging the Intention-Action Gap: Converts abstract goals into tangible visual data, making progress impossible to ignore.
+
+Reducing Cognitive Load: Minimizes the mental energy and anxiety usually required to track routines, allowing users to focus purely on execution.
+
+Removing "Progress Frustration": Eliminates the discouragement of lost momentum by providing a clear, historical record of every win.
+
+Cultivating Logical Assertiveness: Encourages a disciplined, data-driven approach to self-improvement, replacing inconsistency with confident, incremental growth.
+
+Life Reclamation: Empowers users to reclaim their time and build a more positive, structured lifestyle through the power of small daily achievements.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 🛠 Technical Architecture
 
@@ -27,19 +38,7 @@ Beyond the code, this project is designed to bridge the gap between intention an
 
 <h2>🛡️ Privacy-First:</h2> Ensures no data leaves your device; everything is stored locally on your browser.
 
---------------------------------------------------------------------------------------------------------------------------------------------------------
-<h1>🌟 Positive Impact & Human-Centric Design</h1>
-This project goes beyond simple code to address the psychological barriers of habit formation:
 
-Bridging the Intention-Action Gap: Converts abstract goals into tangible visual data, making progress impossible to ignore.
-
-Reducing Cognitive Load: Minimizes the mental energy and anxiety usually required to track routines, allowing users to focus purely on execution.
-
-Removing "Progress Frustration": Eliminates the discouragement of lost momentum by providing a clear, historical record of every win.
-
-Cultivating Logical Assertiveness: Encourages a disciplined, data-driven approach to self-improvement, replacing inconsistency with confident, incremental growth.
-
-Life Reclamation: Empowers users to reclaim their time and build a more positive, structured lifestyle through the power of small daily achievements.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 💻 Installation & Setup<br>
