@@ -49,7 +49,7 @@ git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git<br>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🗺 Future Roadmap</h1><br>
-<h3>[ ] Data Portability:</h3> JSON Export/Import features for cross-device migration.<br><h3>[ ] Dynamic Themes:</h3> System-level Dark Mode integration.<br><h3>[ ] Categorization:</h3> Grouping habits into Health, Career, and Personal sectors.<br>
+<h3>[ ] Data Portability:</h3>JSON Export/Import features for cross-device migration.<br><h3>[ ] Dynamic Themes:</h3>System-level Dark Mode integration.<br><h3>[ ] Categorization:</h3>Grouping habits into Health, Career, and Personal sectors.<br>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
