@@ -6,15 +6,15 @@
 <h1>🌟 Positive Impact & Human-Centric Design</h1>
 This project goes beyond simple code to address the psychological barriers of habit formation:
 
-Bridging the Intention-Action Gap: Converts abstract goals into tangible visual data, making progress impossible to ignore.
+<h3>Bridging the Intention-Action Gap:</h3> Converts abstract goals into tangible visual data, making progress impossible to ignore.
 
-Reducing Cognitive Load: Minimizes the mental energy and anxiety usually required to track routines, allowing users to focus purely on execution.
+<h3>Reducing Cognitive Load:</h3> Minimizes the mental energy and anxiety usually required to track routines, allowing users to focus purely on execution.
 
-Removing "Progress Frustration": Eliminates the discouragement of lost momentum by providing a clear, historical record of every win.
+<h3>Removing "Progress Frustration":</h3> Eliminates the discouragement of lost momentum by providing a clear, historical record of every win.
 
-Cultivating Logical Assertiveness: Encourages a disciplined, data-driven approach to self-improvement, replacing inconsistency with confident, incremental growth.
+<h3>Cultivating Logical Assertiveness:</h3> Encourages a disciplined, data-driven approach to self-improvement, replacing inconsistency with confident, incremental growth.
 
-Life Reclamation: Empowers users to reclaim their time and build a more positive, structured lifestyle through the power of small daily achievements.
+<h3>Life Reclamation:</h3> Empowers users to reclaim their time and build a more positive, structured lifestyle through the power of small daily achievements.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 🛠 Technical Architecture
 
@@ -44,15 +44,15 @@ Life Reclamation: Empowers users to reclaim their time and build a more positive
 💻 Installation & Setup<br>
 Clone the Repo
 <br>
-Bash
-git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git
-Open the Project
+Bash<br>
+git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git<br>
+Open the Project<br>
 Open habit-tracker.html in your browser.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🗺 Future Roadmap</h1><br>
-[ ] Data Portability: JSON Export/Import features for cross-device migration.<br>
-[ ] Dynamic Themes: System-level Dark Mode integration.<br>
-[ ] Categorization: Grouping habits into Health, Career, and Personal sectors.<br>
+<h3>[ ] Data Portability: JSON Export/Import features for cross-device migration.</h3><br>
+<h3>[ ] Dynamic Themes: System-level Dark Mode integration.</h3><br>
+<h3>[ ] Categorization: Grouping habits into Health, Career, and Personal sectors.</h3><br>
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 <h3>Author: Praveen Gurjar</h3>
