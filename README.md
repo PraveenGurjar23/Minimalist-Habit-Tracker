@@ -1,7 +1,7 @@
 <h1>🚀 HabitWork: Personal Growth Analytics<br>
 "Build habits that actually stick."</h1><br>
 A high-performance, privacy-focused utility built to help users master their daily routines through visual data and gamified logic.<br>
-<h1>🔗 Launch Live App →</h1> <br>
+<h1>🔗 <a href="https://praveengurjar23.github.io/Minimalist-Habit-Tracker/habit-tracker.html">Launch Live App →</a></h1> <br>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🌟 Positive Impact & Human-Centric Design</h1>
@@ -34,7 +34,7 @@ This project goes beyond simple code to address the psychological barriers of ha
 
 <h2>📊 Advanced Analytics:</h2> Visualizes habit performance using bar and line charts for data-driven self-improvement.
 
-<h2>📅 Multi-View Calendar:</h3> Offers both Weekly and Monthly grids to identify behavioral patterns over time.
+<h2>📅 Multi-View Calendar:</h2> Offers both Weekly and Monthly grids to identify behavioral patterns over time.
 
 <h2>🎉 Interactive UX:</h2> Includes satisfying confetti animations and toast notifications for task completion.
 
@@ -43,9 +43,12 @@ This project goes beyond simple code to address the psychological barriers of ha
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>💻 Installation & Setup</h1><br>
 <h2>1. Clone the Repo</h2>
-<br><h3>Bash</h3><br>
-git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git<br>
-<h2>2. Open the Project</h2><br>Open habit-tracker.html in your browser.<br>
+
+```bash
+git clone https://github.com/PraveenGurjar23/Minimalist-Habit-Tracker.git
+```
+
+<h2>2. Open the Project</h2><br>Open <code>habit-tracker.html</code> in your browser. No build steps or dependencies needed.<br>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🗺 Future Roadmap</h1><br>
@@ -57,6 +60,6 @@ git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git<br>
 
 <h3>Author: Praveen Gurjar</h3>
 
-<h3>Location: Rajasthan, India</h3>
+<h3>Location: Madhya Pradesh, India</h3>
 
 <h3>Education: B.Tech CSE (Specialization in Gaming Technology) @ VIT Bhopal</h3><BR>
