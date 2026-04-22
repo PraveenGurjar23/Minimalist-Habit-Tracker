@@ -1,6 +1,6 @@
 <h1>🚀 HabitWork: Personal Growth Analytics<br>
 "Build habits that actually stick."</h1><br>
-<sub>A high-performance, privacy-focused utility built to help users master their daily routines through visual data and gamified logic.</sub> <br>
+A high-performance, privacy-focused utility built to help users master their daily routines through visual data and gamified logic.<br>
 <h1>🔗 Launch Live App →</h1> <br>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ This project goes beyond simple code to address the psychological barriers of ha
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>💻 Installation & Setup</h1><br>
 <h2>1. Clone the Repo</h2>
-<br><h3>>Bash</h3><br>
+<br><h3>Bash</h3><br>
 git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git<br>
 <h2>2. Open the Project</h2><br>Open habit-tracker.html in your browser.<br>
 
