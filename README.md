@@ -37,7 +37,7 @@ Life Reclamation: Empowers users to reclaim their time and build a more positive
 
 🛡️ Privacy-First: Ensures no data leaves your device; everything is stored locally on your browser.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-💻 Installation & Setup
+💻 Installation & Setup<br>
 Clone the Repo
 <br>
 Bash
