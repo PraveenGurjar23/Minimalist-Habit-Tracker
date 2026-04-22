@@ -42,17 +42,15 @@ This project goes beyond simple code to address the psychological barriers of ha
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 💻 Installation & Setup<br>
-Clone the Repo
+1. Clone the Repo
 <br>
 Bash<br>
 git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git<br>
-Open the Project<br>
+2. Open the Project<br>
 Open habit-tracker.html in your browser.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🗺 Future Roadmap</h1><br>
-<h3>[ ] Data Portability: JSON Export/Import features for cross-device migration.</h3><br>
-<h3>[ ] Dynamic Themes: System-level Dark Mode integration.</h3><br>
-<h3>[ ] Categorization: Grouping habits into Health, Career, and Personal sectors.</h3><br>
+<h3>[ ] Data Portability: JSON Export/Import features for cross-device migration.</h3><br><h3>[ ] Dynamic Themes: System-level Dark Mode integration.</h3><br><h3>[ ] Categorization: Grouping habits into Health, Career, and Personal sectors.</h3><br>
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 <h3>Author: Praveen Gurjar</h3>
