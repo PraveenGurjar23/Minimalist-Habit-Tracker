@@ -51,9 +51,7 @@ Open habit-tracker.html in your browser.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🗺 Future Roadmap</h1><br>
 [ ] Data Portability: JSON Export/Import features for cross-device migration.
-
 [ ] Dynamic Themes: System-level Dark Mode integration.
-
 [ ] Categorization: Grouping habits into Health, Career, and Personal sectors.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
