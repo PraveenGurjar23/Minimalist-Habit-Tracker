@@ -48,8 +48,8 @@ Bash
 git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git
 Open the Project
 Open habit-tracker.html in your browser.
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-🗺 Future Roadmap
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+<h1>🗺 Future Roadmap</h1><br>
 [ ] Data Portability: JSON Export/Import features for cross-device migration.
 
 [ ] Dynamic Themes: System-level Dark Mode integration.
@@ -57,8 +57,8 @@ Open habit-tracker.html in your browser.
 [ ] Categorization: Grouping habits into Health, Career, and Personal sectors.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Author: Praveen Gurjar
+<h3>Author: Praveen Gurjar</h3>
 
-Location: Rajasthan, India
+<h3>Location: Rajasthan, India</h3>
 
-Education: B.Tech CSE (Specialization in Gaming Technology) @ VIT Bhopal<BR>
+<h3>Education: B.Tech CSE (Specialization in Gaming Technology) @ VIT Bhopal</h3><BR>
