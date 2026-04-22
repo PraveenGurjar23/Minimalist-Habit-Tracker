@@ -14,19 +14,19 @@ Beyond the code, this project is designed to bridge the gap between intention an
 | **Storage** | **LocalStorage API** | 100% Client-side persistence, ensuring total user privacy by keeping data off the cloud. |
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
-✨ Key Features<br>
+<h1>✨ Key Features</h1><br>
 
-🔥 Logic-Driven Streaks: Automatically calculates current and all-time best streaks to maintain momentum.
+<h2>🔥 Logic-Driven Streaks:</h2> Automatically calculates current and all-time best streaks to maintain momentum.
 
-📊 Advanced Analytics: Visualizes habit performance using bar and line charts for data-driven self-improvement.
+<h2>📊 Advanced Analytics:</h2> Visualizes habit performance using bar and line charts for data-driven self-improvement.
 
-📅 Multi-View Calendar: Offers both Weekly and Monthly grids to identify behavioral patterns over time.
+<h2>📅 Multi-View Calendar:</h3> Offers both Weekly and Monthly grids to identify behavioral patterns over time.
 
-🎉 Interactive UX: Includes satisfying confetti animations and toast notifications for task completion.
+<h2>🎉 Interactive UX:</h2> Includes satisfying confetti animations and toast notifications for task completion.
 
-🛡️ Privacy-First: Ensures no data leaves your device; everything is stored locally on your browser.
+<h2>🛡️ Privacy-First:</h2> Ensures no data leaves your device; everything is stored locally on your browser.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
-🌟 Positive Impact & Human-Centric Design
+<h1>🌟 Positive Impact & Human-Centric Design</h1>
 This project goes beyond simple code to address the psychological barriers of habit formation:
 
 Bridging the Intention-Action Gap: Converts abstract goals into tangible visual data, making progress impossible to ignore.
