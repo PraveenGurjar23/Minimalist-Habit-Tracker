@@ -15,7 +15,8 @@ This project goes beyond simple code to address the psychological barriers of ha
 
 <h3>Cultivating Logical Assertiveness:</h3> Encourages a disciplined, data-driven approach to self-improvement, replacing inconsistency with confident, incremental growth.
 
-<h3>Life Reclamation:</h3> Empowers users to reclaim their time and build a more positive, structured lifestyle through the power of small daily achievements.
+<h3>Life Reclamation:</h3> Empowers users to reclaim their time and build a more positive, structured lifestyle through the power of small daily achievements.<br>
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 🛠 Technical Architecture
 
@@ -38,9 +39,9 @@ This project goes beyond simple code to address the psychological barriers of ha
 <h2>🎉 Interactive UX:</h2> Includes satisfying confetti animations and toast notifications for task completion.
 
 <h2>🛡️ Privacy-First:</h2> Ensures no data leaves your device; everything is stored locally on your browser.<br>
---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-💻 Installation & Setup<br>
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+<h1>💻 Installation & Setup</h1><br>
 <h2>1. Clone the Repo</h2>
 <br>Bash<br>
 git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git<br>
