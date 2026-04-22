@@ -14,7 +14,8 @@ Beyond the code, this project is designed to bridge the gap between intention an
 | **Storage** | **LocalStorage API** | 100% Client-side persistence, ensuring total user privacy by keeping data off the cloud. |
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
-✨ Key Features
+✨ Key Features<br>
+
 🔥 Logic-Driven Streaks: Automatically calculates current and all-time best streaks to maintain momentum.
 
 📊 Advanced Analytics: Visualizes habit performance using bar and line charts for data-driven self-improvement.
