@@ -25,6 +25,7 @@ Beyond the code, this project is designed to bridge the gap between intention an
 <h2>🎉 Interactive UX:</h2> Includes satisfying confetti animations and toast notifications for task completion.
 
 <h2>🛡️ Privacy-First:</h2> Ensures no data leaves your device; everything is stored locally on your browser.
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🌟 Positive Impact & Human-Centric Design</h1>
 This project goes beyond simple code to address the psychological barriers of habit formation:
