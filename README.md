@@ -2,6 +2,7 @@
 "Build habits that actually stick."<br>
 <sub>A high-performance, privacy-focused utility built to help users master their daily routines through visual data and gamified logic.</sub> <br>
 🔗 Launch Live App → <br>
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🌟 Positive Impact & Human-Centric Design</h1>
 This project goes beyond simple code to address the psychological barriers of habit formation:
@@ -36,18 +37,14 @@ This project goes beyond simple code to address the psychological barriers of ha
 
 <h2>🎉 Interactive UX:</h2> Includes satisfying confetti animations and toast notifications for task completion.
 
-<h2>🛡️ Privacy-First:</h2> Ensures no data leaves your device; everything is stored locally on your browser.
-
-
+<h2>🛡️ Privacy-First:</h2> Ensures no data leaves your device; everything is stored locally on your browser.<br>
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 💻 Installation & Setup<br>
-1. Clone the Repo
-<br>
-Bash<br>
+<h2>1. Clone the Repo</h2>
+<br>Bash<br>
 git clone https://github.com/PraveenGurjar23/Habit-Task-Tracker.git<br>
-2. Open the Project<br>
-Open habit-tracker.html in your browser.
+<h2>2. Open the Project</h2><br>Open habit-tracker.html in your browser.
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 <h1>🗺 Future Roadmap</h1><br>
 <h3>[ ] Data Portability: JSON Export/Import features for cross-device migration.</h3><br><h3>[ ] Dynamic Themes: System-level Dark Mode integration.</h3><br><h3>[ ] Categorization: Grouping habits into Health, Career, and Personal sectors.</h3><br>
