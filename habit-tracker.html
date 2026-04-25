@@ -626,9 +626,14 @@
     <!-- TODAY -->
     <div id="tab-today" class="app-inner fade-in">
       <div class="dash-header">
-        <div>
-          <div class="dash-greeting" id="greeting">Good morning! 👋</div>
-          <div class="dash-date" id="todayDate"></div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <button class="month-nav" onclick="changeViewDate(-1)">‹</button>
+          <div>
+            <div class="dash-greeting" id="greeting">Good morning! 👋</div>
+            <div class="dash-date" id="todayDate"></div>
+          </div>
+          <button class="month-nav" onclick="changeViewDate(1)">›</button>
+          <button id="jumpToToday" class="tab-btn" style="display:none; font-size:0.75rem; padding:4px 10px;" onclick="jumpToToday()">Today</button>
         </div>
         <button class="add-btn" onclick="openModal()">+ Add Habit</button>
       </div>
@@ -696,8 +701,8 @@
         <canvas id="completionChart" height="100"></canvas>
       </div>
       <div class="chart-card">
-        <div class="chart-title">Habit Success Rate</div>
-        <div class="habit-stats-list" id="habitStatsList"></div>
+        <div class="chart-title">Habit Leaderboard (30-Day Rank) 🏆</div>
+        <div class="habit-stats-list" id="habitLeaderboard"></div>
       </div>
       <div class="chart-card">
         <div class="chart-title">Completion by Day of Week</div>
@@ -738,6 +743,7 @@ let habits = JSON.parse(localStorage.getItem('hw_habits') || '[]');
 let logs = JSON.parse(localStorage.getItem('hw_logs') || '{}');
 let notes = JSON.parse(localStorage.getItem('hw_notes') || '{}');
 let currentMonthOffset = 0;
+let viewDate = new Date();
 let selectedEmoji = EMOJIS[0];
 let completionChart = null, weekdayChart = null;
 
@@ -747,6 +753,7 @@ function save() {
 }
 
 function todayKey() { return new Date().toISOString().slice(0,10); }
+function viewDateKey() { return viewDate.toISOString().slice(0,10); }
 function dateKey(d) { return d.toISOString().slice(0,10); }
 
 function isChecked(habitId, dateStr) {
@@ -754,7 +761,7 @@ function isChecked(habitId, dateStr) {
 }
 
 function toggle(habitId) {
-  const k = todayKey();
+  const k = viewDateKey();
   if (!logs[k]) logs[k] = {};
   logs[k][habitId] = !logs[k][habitId];
   save();
@@ -809,9 +816,22 @@ function setGreeting() {
   const h = new Date().getHours();
   const g = h < 12 ? 'Good morning!' : h < 17 ? 'Good afternoon!' : 'Good evening!';
   document.getElementById('greeting').textContent = g + ' 👋';
-  const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
-  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', opts);
+  const opts = { weekday:'long', month:'long', day:'numeric' };
+  document.getElementById('todayDate').textContent = viewDate.toLocaleDateString('en-US', opts);
   document.getElementById('heroDate').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric' });
+  
+  const isToday = viewDateKey() === todayKey();
+  document.getElementById('jumpToToday').style.display = isToday ? 'none' : 'block';
+}
+
+function changeViewDate(offset) {
+  viewDate.setDate(viewDate.getDate() + offset);
+  renderAll();
+}
+
+function jumpToToday() {
+  viewDate = new Date();
+  renderAll();
 }
 
 // ─── TODAY ──────────────────────────────────────────
@@ -822,13 +842,16 @@ function renderToday() {
     updateProgress(0, 0);
     return;
   }
-  const k = todayKey();
+  const k = viewDateKey();
   const done = habits.filter(h => isChecked(h.id, k)).length;
   updateProgress(done, habits.length);
+  loadNote();
 
   list.innerHTML = habits.map(h => {
     const checked = isChecked(h.id, k);
     const streak = getStreak(h.id);
+    const best = getBestStreak(h.id);
+    const rate = getCompletionRate(h.id, 30);
     return `
     <div class="habit-card ${checked ? 'checked' : ''}" onclick="toggle('${h.id}')">
       <div class="check-circle ${checked ? 'done' : ''}">
@@ -837,7 +860,10 @@ function renderToday() {
       <div class="habit-emoji">${h.emoji}</div>
       <div class="habit-info">
         <div class="habit-name ${checked ? 'done-text' : ''}">${h.name}</div>
-        <div class="habit-sub">${streak > 0 ? `🔥 ${streak} day streak` : 'Start your streak today!'}</div>
+        <div class="habit-sub">
+          ${streak > 0 ? `🔥 ${streak}d streak` : 'No streak'} 
+          <span style="opacity:0.5; margin-left:8px;">(Best: ${best}d • ${rate}%)</span>
+        </div>
       </div>
       ${streak > 0 ? `<div class="streak-badge">🔥 ${streak}</div>` : ''}
       <button class="del-btn" onclick="event.stopPropagation();deleteHabit('${h.id}')">🗑</button>
@@ -861,10 +887,10 @@ function updateProgress(done, total) {
 }
 
 function checkAllDone() {
-  const k = todayKey();
+  const k = viewDateKey();
   const done = habits.filter(h => isChecked(h.id, k)).length;
   if (done === habits.length && habits.length > 0) {
-    launchConfetti();
+    if (viewDateKey() === todayKey()) launchConfetti();
     showToast('🎉 All habits done for today!');
   }
 }
@@ -1000,20 +1026,25 @@ function renderStats() {
     options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { max: 100, ticks: { callback: v => v + '%' } } } }
   });
 
-  // habit rates
-  const hList = document.getElementById('habitStatsList');
-  if (!habits.length) { hList.innerHTML = '<div class="empty"><div class="empty-icon">📊</div><p>Add habits to see stats.</p></div>'; return; }
-  hList.innerHTML = habits.map(h => {
-    const rate = getCompletionRate(h.id, 30);
-    return `<div class="hstat">
-      <div class="hstat-emoji">${h.emoji}</div>
-      <div class="hstat-info">
-        <div class="hstat-name">${h.name}</div>
-        <div class="hstat-bar"><div class="hstat-fill" style="width:${rate}%"></div></div>
-      </div>
-      <div class="hstat-pct">${rate}%</div>
-    </div>`;
-  }).join('');
+  // habit leaderboard
+  const lb = document.getElementById('habitLeaderboard');
+  if (!habits.length) { 
+    lb.innerHTML = '<div class="empty"><div class="empty-icon">📊</div><p>Add habits to see stats.</p></div>'; 
+  } else {
+    const sorted = [...habits].sort((a,b) => getCompletionRate(b.id, 30) - getCompletionRate(a.id, 30));
+    lb.innerHTML = sorted.map((h, i) => {
+      const rate = getCompletionRate(h.id, 30);
+      return `<div class="hstat">
+        <div class="hstat-emoji" style="font-weight:800; font-family:'Outfit'; color:var(--green);">${i+1}</div>
+        <div class="hstat-emoji">${h.emoji}</div>
+        <div class="hstat-info">
+          <div class="hstat-name">${h.name}</div>
+          <div class="hstat-bar"><div class="hstat-fill" style="width:${rate}%"></div></div>
+        </div>
+        <div class="hstat-pct">${rate}%</div>
+      </div>`;
+    }).join('');
+  }
 
   // weekday chart
   const wLabels = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -1148,14 +1179,14 @@ function saveNote() {
   }
   
   document.getElementById('noteCount').textContent = `${Math.min(words.length, 200)} / 200 words`;
-  notes[todayKey()] = el.value;
+  notes[viewDateKey()] = el.value;
   localStorage.setItem('hw_notes', JSON.stringify(notes));
 }
 
 function loadNote() {
   const el = document.getElementById('dailyNote');
   if (!el) return;
-  const note = notes[todayKey()] || '';
+  const note = notes[viewDateKey()] || '';
   el.value = note;
   const words = note.trim().split(/\s+/).filter(w => w.length > 0);
   document.getElementById('noteCount').textContent = `${words.length} / 200 words`;
