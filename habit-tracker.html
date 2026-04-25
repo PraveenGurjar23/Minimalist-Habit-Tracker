@@ -25,6 +25,20 @@
     --radius: 16px;
     --radius-sm: 10px;
   }
+
+  [data-theme="dark"] {
+    --bg: #0f172a;
+    --bg2: #020617;
+    --bg3: #1e293b;
+    --text: #f8fafc;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --border: #1e293b;
+    --card: #0f172a;
+    --shadow: 0 10px 30px rgba(0,0,0,.4);
+    --green-pale: rgba(22, 163, 74, 0.15);
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -48,6 +62,8 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
+  [data-theme="dark"] .topbar { background: rgba(15, 23, 42, 0.9); }
+
   .logo { display: flex; align-items: center; gap: 10px; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--text); text-decoration: none; }
   .logo-icon { width: 34px; height: 34px; background: var(--green); border-radius: 9px; display: grid; place-items: center; }
   .logo-icon svg { width: 18px; height: 18px; fill: #fff; }
@@ -92,6 +108,8 @@
     border-radius: 24px; padding: 28px; border: 1px solid #bbf7d0;
     position: relative; overflow: hidden;
   }
+  [data-theme="dark"] .hero-visual { background: linear-gradient(135deg, #064e3b 0%, #022c22 100%); border-color: #065f46; }
+
   .hero-visual::before {
     content: ''; position: absolute; top: -40px; right: -40px;
     width: 200px; height: 200px; border-radius: 50%;
@@ -99,8 +117,8 @@
   }
   .mock-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
   .mock-header h3 { font-size: 1rem; font-weight: 700; }
-  .mock-date { font-size: .78rem; color: var(--text2); background: #fff; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); }
-  .mock-habit { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 12px; padding: 12px 16px; margin-bottom: 10px; border: 1px solid var(--border); transition: all .3s; }
+  .mock-date { font-size: .78rem; color: var(--text2); background: var(--card); padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); }
+  .mock-habit { display: flex; align-items: center; gap: 12px; background: var(--card); border-radius: 12px; padding: 12px 16px; margin-bottom: 10px; border: 1px solid var(--border); transition: all .3s; }
   .mock-habit:hover { transform: translateX(4px); }
   .mock-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; display: grid; place-items: center; }
   .mock-check.done { background: var(--green); border-color: var(--green); }
@@ -161,7 +179,7 @@
   /* ── APP ── */
   .app-nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: #fff; border-bottom: 1px solid var(--border);
+    background: var(--bg); border-bottom: 1px solid var(--border);
     display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
   }
   .app-logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; margin-right: auto; display: flex; align-items: center; gap: 8px; }
@@ -224,8 +242,9 @@
   }
   .modal-overlay.open { display: flex; }
   .modal {
-    background: #fff; border-radius: 20px; padding: 28px; width: 100%; max-width: 440px;
+    background: var(--card); border-radius: 20px; padding: 28px; width: 100%; max-width: 440px;
     box-shadow: 0 20px 60px rgba(0,0,0,.2); animation: slideUp .25s ease;
+    border: 1px solid var(--border);
   }
   @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } }
   .modal h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 20px; }
@@ -333,6 +352,18 @@
 
   .fade-in { animation: fadeIn .4s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } }
+
+  /* Theme Toggle */
+  .theme-toggle {
+    background: var(--bg3); border: none; width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer; color: var(--text);
+    transition: all .2s; margin-left: 8px;
+  }
+  .theme-toggle:hover { transform: rotate(15deg) scale(1.1); background: var(--border); }
+  .theme-toggle svg { width: 20px; height: 20px; fill: currentColor; }
+  .sun-icon { display: none; }
+  [data-theme="dark"] .sun-icon { display: block; }
+  [data-theme="dark"] .moon-icon { display: none; }
 </style>
 </head>
 <body>
@@ -359,7 +390,13 @@
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#stats">Results</a></li>
     </ul>
-    <button class="btn btn-green" onclick="openApp()">Open Free Tracker →</button>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+        <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zM2 12h2M20 12h2M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 4.93l-1.41 1.41M4.93 17.66l-1.41 1.41"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+      <button class="btn btn-green" onclick="openApp()">Open Free Tracker →</button>
+    </div>
   </nav>
 
   <!-- Hero -->
@@ -368,6 +405,9 @@
       <div class="hero-badge">🌱 100% Free • No Sign-up Required</div>
       <h1>Build Habits That<br><span>Actually Stick.</span></h1>
       <p>Track your daily habits with beautiful visuals, streaks, charts, and weekly/monthly views — all in one place, all for free, forever.</p>
+      <div id="quote-container" class="hero-badge" style="background: var(--bg2); border: 2px solid var(--border); border-left: 5px solid var(--green); color: var(--text); display: block; max-width: 480px; margin-bottom: 30px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.05rem; line-height: 1.5; border-radius: 12px; padding: 18px 24px; box-shadow: var(--shadow); position: relative;">
+        "Believe you can and you’re halfway there." – Theodore Roosevelt
+      </div>
       <div class="hero-btns">
         <button class="btn btn-green btn-lg" onclick="openApp()">Start Tracking Free →</button>
         <a href="#features" class="btn btn-outline btn-lg">See Features</a>
@@ -533,6 +573,30 @@
     </div>
   </section>
 
+  <!-- Community & Feedback Section -->
+  <section class="feedback-section" style="padding: 100px 5%; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: center;">
+      <div>
+        <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 24px; font-family: 'Outfit', sans-serif; font-weight: 800;">We Value Your Presence 🤝</h2>
+        <p style="color: var(--text2); line-height: 1.8; font-size: 1.08rem; font-family: 'DM Sans', sans-serif;">
+          Hi there! We apologize for any inconsistency lately. We are currently implementing major improvements to bring you a better experience. 
+          Your feedback is essential to building a stronger platform and helping us master the logic of habit formation together.
+        </p>
+      </div>
+      <div style="background: var(--card); padding: 48px; border-radius: 28px; border: 2px dashed var(--green); text-align: center; box-shadow: var(--shadow);">
+        <div style="width: 60px; height: 60px; background: var(--green-pale); border-radius: 50%; display: grid; place-items: center; margin: 0 auto 24px;">
+          <span style="font-size: 1.8rem;">💡</span>
+        </div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 12px; font-family: 'Outfit', sans-serif; font-weight: 700;">Have a suggestion?</h3>
+        <p style="font-size: 0.95rem; color: var(--text3); margin-bottom: 28px; font-family: 'DM Sans', sans-serif;">We'd love to hear your thoughts or suggestions for the platform.</p>
+        <a href="mailto:praveengurjarrj23@gmail.com" class="btn btn-green" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 16px; font-family: 'Outfit', sans-serif;">
+          Send Feedback
+        </a>
+        <div style="margin-top: 20px; font-size: 0.85rem; color: var(--text3); font-family: 'Outfit', sans-serif; font-weight: 600;">praveengurjarrj23@gmail.com</div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>© 2026 <span>HabitWork</span> — Free Habit Tracker for Everyone</p>
   </footer>
@@ -551,7 +615,11 @@
     <button class="tab-btn" data-tab="weekly" onclick="switchTab('weekly',this)">Weekly</button>
     <button class="tab-btn" data-tab="monthly" onclick="switchTab('monthly',this)">Monthly</button>
     <button class="tab-btn" data-tab="stats" onclick="switchTab('stats',this)">Stats</button>
-    <button class="tab-btn" onclick="document.getElementById('landing').style.display='block';document.getElementById('app').style.display='none';" style="color:var(--text3);font-size:.8rem">🏠</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme" style="margin-left: auto;">
+      <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zM2 12h2M20 12h2M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 4.93l-1.41 1.41M4.93 17.66l-1.41 1.41"/></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <button class="tab-btn" onclick="document.getElementById('landing').style.display='block';document.getElementById('app').style.display='none';" style="color:var(--text3);font-size:.8rem;margin-left:8px">🏠</button>
   </nav>
 
   <div class="app-content">
@@ -582,6 +650,13 @@
 
       <div class="section-head"><h3>📋 Today's Habits</h3></div>
       <div id="habitList"></div>
+
+      <!-- Daily Note -->
+      <div class="chart-card" style="margin-top: 24px;">
+        <div class="section-head"><h3>📝 Daily Note</h3></div>
+        <textarea id="dailyNote" class="form-input" placeholder="How was your day? (Max 200 words)" rows="3" style="width:100%; background:var(--bg2); border-color:var(--border); resize:none; font-family:inherit; min-height: 100px;" oninput="saveNote()"></textarea>
+        <div style="display:flex; justify-content:flex-end; font-size:0.75rem; color:var(--text3); margin-top:8px;" id="noteCount">0 / 200 words</div>
+      </div>
     </div>
 
     <!-- WEEKLY -->
@@ -661,6 +736,7 @@
 const EMOJIS = ['🏋️','📚','💧','🧘','🍎','🛌','🚶','📝','💊','🧹','🎯','🚴','🎨','🎸','💻','🌿','🏃','🤸','📖','☀️','🥗','☕','🧪','💰','🙏','🎵','🧠','🌙'];
 let habits = JSON.parse(localStorage.getItem('hw_habits') || '[]');
 let logs = JSON.parse(localStorage.getItem('hw_logs') || '{}');
+let notes = JSON.parse(localStorage.getItem('hw_notes') || '{}');
 let currentMonthOffset = 0;
 let selectedEmoji = EMOJIS[0];
 let completionChart = null, weekdayChart = null;
@@ -1031,7 +1107,7 @@ function showToast(msg) {
 }
 
 // ─── INIT ───────────────────────────────────────────
-function renderAll() { setGreeting(); renderToday(); }
+function renderAll() { setGreeting(); renderToday(); loadNote(); }
 
 // Enter key for modal
 document.addEventListener('keydown', e => {
@@ -1039,6 +1115,87 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
 
+// ─── QUOTES ─────────────────────────────────────────
+const QUOTES = [
+  "\"Believe you can and you’re halfway there.\" – Theodore Roosevelt",
+  "\"Success is the sum of small efforts, repeated day in and day out.\" – Robert Collier",
+  "\"Consistency is what transforms average into excellence.\"",
+  "\"It’s not what we do once in a while that shapes our lives. It’s what we do consistently.\" – Tony Robbins",
+  "\"Motivation gets you going, but habit is what keeps you going.\" – Jim Ryun",
+  "\"Small steps in the right direction can turn out to be the biggest steps of your life.\"",
+  "\"The secret of your future is hidden in your daily routine.\"",
+  "\"Discipline is choosing between what you want now and what you want most.\"",
+  "\"Success doesn't come from what you do occasionally, but what you do consistently.\"",
+  "\"Consistency is the hallmark of the unimaginative, but also the key to success.\""
+];
+
+function displayRandomQuote() {
+  const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  const el = document.getElementById('quote-container');
+  if (el) el.textContent = quote;
+}
+
+// ─── NOTES ──────────────────────────────────────────
+function saveNote() {
+  const el = document.getElementById('dailyNote');
+  const text = el.value;
+  const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+  
+  if (words.length > 200) {
+    const trimmed = words.slice(0, 200).join(' ');
+    el.value = trimmed;
+    showToast('⚠️ Maximum 200 words reached');
+  }
+  
+  document.getElementById('noteCount').textContent = `${Math.min(words.length, 200)} / 200 words`;
+  notes[todayKey()] = el.value;
+  localStorage.setItem('hw_notes', JSON.stringify(notes));
+}
+
+function loadNote() {
+  const el = document.getElementById('dailyNote');
+  if (!el) return;
+  const note = notes[todayKey()] || '';
+  el.value = note;
+  const words = note.trim().split(/\s+/).filter(w => w.length > 0);
+  document.getElementById('noteCount').textContent = `${words.length} / 200 words`;
+}
+
+// ─── THEME ──────────────────────────────────────────
+function initTheme() {
+  const theme = localStorage.getItem('hw_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+  updateChartThemes();
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('hw_theme', next);
+  updateChartThemes();
+}
+function updateChartThemes() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const color = isDark ? '#94a3b8' : '#475569';
+  const gridColor = isDark ? '#1e293b' : '#e2e8f0';
+  
+  if (completionChart) {
+    completionChart.options.scales.x.ticks.color = color;
+    completionChart.options.scales.y.ticks.color = color;
+    completionChart.options.scales.x.grid.color = gridColor;
+    completionChart.options.scales.y.grid.color = gridColor;
+    completionChart.update();
+  }
+  if (weekdayChart) {
+    weekdayChart.options.scales.x.ticks.color = color;
+    weekdayChart.options.scales.y.ticks.color = color;
+    weekdayChart.options.scales.x.grid.color = gridColor;
+    weekdayChart.options.scales.y.grid.color = gridColor;
+    weekdayChart.update();
+  }
+}
+
+initTheme();
 setGreeting();
 </script>
 </body>
