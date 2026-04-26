@@ -182,7 +182,7 @@
     background: var(--bg); border-bottom: 1px solid var(--border);
     display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
   }
-  .app-logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; margin-right: auto; display: flex; align-items: center; gap: 8px; }
+  .app-logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; margin-right: auto; display: flex; align-items: center; gap: 8px; cursor: pointer; }
   .app-logo .logo-icon { width: 28px; height: 28px; }
   .tab-btn {
     padding: 7px 16px; border-radius: 50px; border: none; background: transparent;
@@ -556,7 +556,7 @@
 <!-- ═══════════════ APP ═══════════════ -->
 <div id="app">
   <nav class="app-nav">
-    <div class="app-logo">
+    <div class="app-logo" onclick="goHome()">
       <div class="logo-icon">
         <svg viewBox="0 0 24 24" fill="white" width="16" height="16"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" fill="none" stroke="white" stroke-width="2"/></svg>
       </div>
@@ -779,6 +779,12 @@ function setGreeting() {
 function changeViewDate(offset) {
   viewDate.setDate(viewDate.getDate() + offset);
   renderAll();
+}
+
+function goHome() {
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('app').style.display = 'none';
+  renderLanding();
 }
 
 function jumpToToday() {
