@@ -387,7 +387,6 @@
     </a>
     <ul class="nav-links">
       <li><a href="#features">Features</a></li>
-      <li><a href="#reviews">Reviews</a></li>
       <li><a href="#stats">Results</a></li>
     </ul>
     <div style="display: flex; align-items: center; gap: 12px;">
@@ -418,34 +417,18 @@
         <div class="trust-item"><div class="dot"></div> Data saved locally</div>
       </div>
     </div>
-    <div class="hero-visual">
+    <div class="hero-visual" onclick="openApp()" style="cursor:pointer">
       <div class="mock-header">
-        <h3>📋 Today's Habits</h3>
+        <h3>📋 Your Habits Today</h3>
         <span class="mock-date" id="heroDate"></span>
       </div>
-      <div class="mock-habit">
-        <div class="mock-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <span class="mock-label">🏋️ Morning Workout</span>
-        <span class="mock-streak">🔥 12 days</span>
-      </div>
-      <div class="mock-habit">
-        <div class="mock-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <span class="mock-label">📚 Read 20 Pages</span>
-        <span class="mock-streak">🔥 7 days</span>
-      </div>
-      <div class="mock-habit">
-        <div class="mock-check"></div>
-        <span class="mock-label">💧 Drink 2L Water</span>
-        <span class="mock-streak" style="opacity:.4">🔥 0 days</span>
-      </div>
-      <div class="mock-habit">
-        <div class="mock-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <span class="mock-label">🧘 Meditate 10 min</span>
-        <span class="mock-streak">🔥 5 days</span>
+      <div id="hero-habit-list">
+        <!-- Dynamic list -->
+        <div class="mock-habit"><div class="mock-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="mock-label">Start tracking to see habits!</span></div>
       </div>
       <div class="mock-prog">
-        <div class="mock-prog-label"><span>Daily Progress</span><span><b>3/4</b> done</span></div>
-        <div class="prog-bar"><div class="prog-fill" style="width:75%"></div></div>
+        <div class="mock-prog-label"><span>Today's Progress</span><span id="hero-prog-text"><b>0/0</b> done</span></div>
+        <div class="prog-bar"><div id="hero-prog-fill" class="prog-fill" style="width:0%"></div></div>
       </div>
     </div>
   </section>
@@ -453,24 +436,24 @@
   <!-- Stats -->
   <section class="stats-section" id="stats">
     <div class="section-center">
-      <h2>It Really Works</h2>
-      <p>Over 90% of users reported measurable improvements in staying consistent with their daily habits.</p>
+      <h2>Your Live Results</h2>
+      <p>Here is a real-time look at your consistency and progress across all habits.</p>
     </div>
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-num">95%</div>
-        <div class="stat-label">built long-term consistency by tracking habits every day</div>
-        <div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div>
+        <div class="stat-num" id="stat-habits">0</div>
+        <div class="stat-label">Total habits being tracked in your personal system</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:100%"></div></div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">94%</div>
-        <div class="stat-label">feel more motivated after seeing their progress visually</div>
-        <div class="stat-bar"><div class="stat-bar-fill" style="width:94%"></div></div>
+        <div class="stat-num" id="stat-checks">0</div>
+        <div class="stat-label">Total habit check-ins recorded across all time</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:100%"></div></div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">91%</div>
-        <div class="stat-label">replaced at least one bad habit with a healthier alternative</div>
-        <div class="stat-bar"><div class="stat-bar-fill" style="width:91%"></div></div>
+        <div class="stat-num" id="stat-streak">0</div>
+        <div class="stat-label">Your all-time best streak achieved across any habit</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:100%"></div></div>
       </div>
     </div>
   </section>
@@ -482,47 +465,47 @@
       <p>A complete habit tracking system packed with powerful features — completely free.</p>
     </div>
     <div class="features-grid">
-      <div class="feat-card">
+      <div class="feat-card" onclick="openApp()" style="cursor:pointer">
         <div class="feat-icon">✅</div>
         <h3>Daily Check-ins</h3>
         <p>Mark habits complete every day with a satisfying tap. Visual confirmation keeps you motivated.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card" onclick="openApp()" style="cursor:pointer">
         <div class="feat-icon">🔥</div>
         <h3>Streak Counter</h3>
         <p>Track your winning streaks automatically. Watch your consistency grow day by day.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card" onclick="switchTab('stats', document.querySelectorAll('.tab-btn')[3]); openApp();" style="cursor:pointer">
         <div class="feat-icon">📊</div>
         <h3>Progress Charts</h3>
         <p>Beautiful bar and line charts show your habit completion over time at a glance.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card" onclick="switchTab('weekly', document.querySelectorAll('.tab-btn')[1]); openApp();" style="cursor:pointer">
         <div class="feat-icon">📅</div>
         <h3>Weekly View</h3>
         <p>See your entire week for each habit in a clean grid. Spot patterns instantly.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card" onclick="switchTab('monthly', document.querySelectorAll('.tab-btn')[2]); openApp();" style="cursor:pointer">
         <div class="feat-icon">🗓️</div>
         <h3>Monthly Calendar</h3>
         <p>Color-coded calendar view shows your best months and where you can improve.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card" onclick="openApp(); openModal();" style="cursor:pointer">
         <div class="feat-icon">🎯</div>
         <h3>Custom Habits</h3>
         <p>Add any habit with a custom emoji and name. Build your personal system your way.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card" onclick="openApp()" style="cursor:pointer">
         <div class="feat-icon">💾</div>
         <h3>Auto-Save</h3>
         <p>Everything saves automatically to your browser. No account, no cloud, no privacy concerns.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card" onclick="openApp()" style="cursor:pointer">
         <div class="feat-icon">📱</div>
         <h3>Works Everywhere</h3>
         <p>Fully responsive on mobile, tablet, and desktop. Works in any browser on any device.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card" onclick="openApp()" style="cursor:pointer">
         <div class="feat-icon">💯</div>
         <h3>Completely Free</h3>
         <p>No hidden fees, no processing charges, no subscriptions. Free now, free forever.</p>
@@ -530,39 +513,7 @@
     </div>
   </section>
 
-  <!-- Reviews -->
-  <section class="reviews-section" id="reviews">
-    <div class="section-center">
-      <h2>Reviews From Our Users 😊</h2>
-      <p>Thousands of people are already building better habits every day.</p>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"I've tried tons of habit apps but nothing kept me as accountable as this. The built-in checklist and charts make it genuinely fun. I actually look forward to updating it every day!"</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar" style="background:#16a34a">E</div>
-          <div><div class="reviewer-name">Ethan M.</div><div class="reviewer-sub">Using for 3 months</div></div>
-        </div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"The visual progress keeps me so motivated. The layout is clean and easy to navigate. I've built better routines way faster than I expected. Highly recommend!"</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar" style="background:#0891b2">J</div>
-          <div><div class="reviewer-name">Jordan R.</div><div class="reviewer-sub">Using for 6 weeks</div></div>
-        </div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Simple, organized, and incredibly effective. Checking off my daily goals feels great and the streak system keeps me on track. I've never been this consistent before!"</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar" style="background:#7c3aed">D</div>
-          <div><div class="reviewer-name">Daniel S.</div><div class="reviewer-sub">Using for 2 months</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- CTA -->
   <section class="cta-section">
@@ -750,6 +701,7 @@ let completionChart = null, weekdayChart = null;
 function save() {
   localStorage.setItem('hw_habits', JSON.stringify(habits));
   localStorage.setItem('hw_logs', JSON.stringify(logs));
+  renderLanding();
 }
 
 function todayKey() { return new Date().toISOString().slice(0,10); }
@@ -1138,7 +1090,7 @@ function showToast(msg) {
 }
 
 // ─── INIT ───────────────────────────────────────────
-function renderAll() { setGreeting(); renderToday(); loadNote(); }
+function renderAll() { setGreeting(); renderToday(); loadNote(); renderLanding(); }
 
 // Enter key for modal
 document.addEventListener('keydown', e => {
@@ -1161,9 +1113,55 @@ const QUOTES = [
 ];
 
 function displayRandomQuote() {
-  const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  const lastIndex = parseInt(localStorage.getItem('hw_last_quote_idx')) || -1;
+  let newIdx;
+  do {
+    newIdx = Math.floor(Math.random() * QUOTES.length);
+  } while (newIdx === lastIndex && QUOTES.length > 1);
+  
+  localStorage.setItem('hw_last_quote_idx', newIdx);
+  const quote = QUOTES[newIdx];
   const el = document.getElementById('quote-container');
   if (el) el.textContent = quote;
+}
+
+function renderLanding() {
+  // Update stats
+  document.getElementById('stat-habits').textContent = habits.length;
+  let checks = 0;
+  Object.values(logs).forEach(d => Object.values(d).forEach(v => { if (v) checks++; }));
+  document.getElementById('stat-checks').textContent = checks;
+  const best = habits.length ? Math.max(...habits.map(h => getBestStreak(h.id))) : 0;
+  document.getElementById('stat-streak').textContent = best;
+
+  // Update hero habits
+  const heroList = document.getElementById('hero-habit-list');
+  const heroProgText = document.getElementById('hero-prog-text');
+  const heroProgFill = document.getElementById('hero-prog-fill');
+  
+  if (!habits.length) {
+    heroList.innerHTML = `<div class="mock-habit"><div class="mock-check"></div><span class="mock-label">No habits yet! Click to start.</span></div>`;
+    heroProgText.innerHTML = `<b>0/0</b> done`;
+    heroProgFill.style.width = '0%';
+    return;
+  }
+
+  const k = todayKey();
+  const sorted = habits.slice(0, 4); // Show top 4
+  const doneCount = habits.filter(h => isChecked(h.id, k)).length;
+  
+  heroList.innerHTML = sorted.map(h => {
+    const done = isChecked(h.id, k);
+    const streak = getStreak(h.id);
+    return `<div class="mock-habit">
+      <div class="mock-check ${done ? 'done' : ''}">${done ? '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' : ''}</div>
+      <span class="mock-label">${h.emoji} ${h.name}</span>
+      <span class="mock-streak" style="${streak === 0 ? 'opacity:.4' : ''}">🔥 ${streak} days</span>
+    </div>`;
+  }).join('');
+  
+  heroProgText.innerHTML = `<b>${doneCount}/${habits.length}</b> done`;
+  heroProgFill.style.width = ((doneCount / habits.length) * 100) + '%';
 }
 
 // ─── NOTES ──────────────────────────────────────────
@@ -1228,6 +1226,7 @@ function updateChartThemes() {
 
 initTheme();
 displayRandomQuote();
+renderLanding();
 setGreeting();
 </script>
 </body>
