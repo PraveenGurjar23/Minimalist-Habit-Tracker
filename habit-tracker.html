@@ -328,7 +328,7 @@
   @media(max-width: 640px) {
     .nav-links, .topbar .btn { display: none; }
     .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 120px; }
-    .stats-grid, .features-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .stats-grid, .features-grid, .reviews-grid, .pros-cons-grid { grid-template-columns: 1fr !important; }
     .stats-cards { grid-template-columns: 1fr 1fr; }
     .tab-btn { padding: 6px 10px; font-size: .8rem; }
     .app-logo span { display: none; }
@@ -397,6 +397,7 @@
     <ul class="nav-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#stats">Results</a></li>
+      <li><a href="#pros-and-cons">Pros and Cons</a></li>
     </ul>
     <div style="display: flex; align-items: center; gap: 12px;">
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
@@ -463,6 +464,41 @@
         <div class="stat-num" id="stat-streak">0</div>
         <div class="stat-label">Your all-time best streak achieved across any habit</div>
         <div class="stat-bar"><div class="stat-bar-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pros and Cons -->
+  <section class="features-section" id="pros-and-cons" style="background: var(--bg);">
+    <div class="section-center">
+      <h2>Pros and Cons</h2>
+      <p>Here is an honest look at what makes HabitWork great, and where it might not be for everyone.</p>
+    </div>
+    <div class="pros-cons-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 900px; margin: 0 auto;">
+      <!-- Pros -->
+      <div style="background: var(--green-pale); border-radius: var(--radius); padding: 32px; border: 1px solid #bbf7d0;">
+        <h3 style="color: var(--green); font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          Pros
+        </h3>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+          <li style="display: flex; gap: 12px; align-items: flex-start;"><span style="color: var(--green); font-weight: bold;">+</span> <span style="color: var(--text); font-size: 0.95rem;">100% Free forever with no hidden fees or subscriptions.</span></li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;"><span style="color: var(--green); font-weight: bold;">+</span> <span style="color: var(--text); font-size: 0.95rem;">No sign-up required, start tracking immediately.</span></li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;"><span style="color: var(--green); font-weight: bold;">+</span> <span style="color: var(--text); font-size: 0.95rem;">Clean, minimalist, and distraction-free interface.</span></li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;"><span style="color: var(--green); font-weight: bold;">+</span> <span style="color: var(--text); font-size: 0.95rem;">Data is stored securely locally on your device.</span></li>
+        </ul>
+      </div>
+      <!-- Cons -->
+      <div style="background: var(--bg2); border-radius: var(--radius); padding: 32px; border: 1px solid var(--border);">
+        <h3 style="color: var(--text2); font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+          Cons
+        </h3>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+          <li style="display: flex; gap: 12px; align-items: flex-start;"><span style="color: var(--text3); font-weight: bold;">-</span> <span style="color: var(--text2); font-size: 0.95rem;">No cloud sync, so data doesn't sync across different devices automatically.</span></li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;"><span style="color: var(--text3); font-weight: bold;">-</span> <span style="color: var(--text2); font-size: 0.95rem;">Lacks advanced social sharing or team features.</span></li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;"><span style="color: var(--text3); font-weight: bold;">-</span> <span style="color: var(--text2); font-size: 0.95rem;">Limited integrations with third-party apps like Apple Health or Google Fit.</span></li>
+        </ul>
       </div>
     </div>
   </section>
