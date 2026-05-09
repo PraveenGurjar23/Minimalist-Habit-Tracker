@@ -2573,6 +2573,14 @@
     displayRandomQuote();
     renderLanding();
     setGreeting();
+
+    // Reset scroll position on refresh
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.onload = function() {
+      window.scrollTo(0, 0);
+    };
   </script>
 </body>
 
