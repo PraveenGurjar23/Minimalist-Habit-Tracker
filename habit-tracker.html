@@ -1899,7 +1899,7 @@
         </svg>
       </button>
       <button class="tab-btn"
-        onclick="document.getElementById('landing').style.display='block';document.getElementById('app').style.display='none';"
+        onclick="goHome()"
         style="color:var(--text3);font-size:.8rem;margin-left:8px">🏠</button>
     </nav>
 
@@ -2099,6 +2099,7 @@
     function openApp() {
       document.getElementById('landing').style.display = 'none';
       document.getElementById('app').style.display = 'block';
+      localStorage.setItem('hw_view', 'app');
       renderAll();
     }
 
@@ -2123,6 +2124,7 @@
     function goHome() {
       document.getElementById('landing').style.display = 'block';
       document.getElementById('app').style.display = 'none';
+      localStorage.setItem('hw_view', 'landing');
       renderLanding();
     }
 
@@ -2403,6 +2405,7 @@
       const el = document.getElementById('tab-' + tab);
       el.style.display = 'block';
       el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in');
+      localStorage.setItem('hw_tab', tab);
       if (tab === 'weekly') renderWeekly();
       if (tab === 'monthly') { populateMonthSelect(); renderMonthly(); }
       if (tab === 'stats') renderStats();
@@ -2573,6 +2576,16 @@
     displayRandomQuote();
     renderLanding();
     setGreeting();
+
+    // Restore view state
+    const savedView = localStorage.getItem('hw_view') || 'landing';
+    const savedTab = localStorage.getItem('hw_tab') || 'today';
+    
+    if (savedView === 'app') {
+      openApp();
+      const tabBtn = document.querySelector(`.tab-btn[data-tab="${savedTab}"]`);
+      if (tabBtn) switchTab(savedTab, tabBtn);
+    }
 
     // Reset scroll position on refresh
     if ('scrollRestoration' in history) {
