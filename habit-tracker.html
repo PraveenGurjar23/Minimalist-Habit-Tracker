@@ -1881,7 +1881,7 @@
           "Believe you can and you’re halfway there." – Theodore Roosevelt
         </div>
         <div class="hero-btns">
-          <button class="btn btn-green btn-lg" onclick="openApp()">Start Tracking Free →</button>
+          <button class="btn btn-green btn-lg" onclick="openApp('today')">Start Tracking Free →</button>
           <a href="#features" class="btn btn-outline btn-lg">See Features</a>
         </div>
         <div class="hero-trust">
@@ -1896,7 +1896,7 @@
           </div>
         </div>
       </div>
-      <div class="hero-visual" onclick="openApp()" style="cursor:pointer">
+      <div class="hero-visual" onclick="openApp('today')" style="cursor:pointer" title="Click to view Today's Habits">
         <div class="mock-header">
           <h3>📋 Your Habits Today</h3>
           <span class="mock-date" id="heroDate"></span>
@@ -2069,6 +2069,10 @@
               multiple devices (phone and PC) or if you need automated reminders to keep you on track.</p>
           </div>
         </div>
+
+        <div style="text-align: center; margin-top: 28px;">
+          <button class="btn btn-green btn-lg" onclick="openApp('today')">🚀 Open Free Tracker Now →</button>
+        </div>
       </div>
     </section>
 
@@ -2079,50 +2083,53 @@
         <p>A complete habit tracking system packed with powerful features — completely free.</p>
       </div>
       <div class="features-grid">
-        <div class="feat-card" onclick="openApp()" style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('garden')" style="cursor:pointer; border-color:#bbf7d0; background:var(--green-pale);">
+          <div class="feat-icon">🌱</div>
+          <h3 style="color:var(--green);">Focus Garden & Forest</h3>
+          <p>Grow virtual trees with a Pomodoro timer or 99-hour Freehand Stopwatch. Earn coins, unlock plants & sync ambient sky!</p>
+          <div style="margin-top:10px; font-weight:700; color:var(--green); font-size:0.85rem;">Launch Focus Garden →</div>
+        </div>
+        <div class="feat-card" onclick="openApp('today')" style="cursor:pointer">
           <div class="feat-icon">✅</div>
           <h3>Daily Check-ins</h3>
           <p>Mark habits complete every day with a satisfying tap. Visual confirmation keeps you motivated.</p>
         </div>
-        <div class="feat-card" onclick="openApp()" style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('today')" style="cursor:pointer">
           <div class="feat-icon">🔥</div>
           <h3>Streak Counter</h3>
           <p>Track your winning streaks automatically. Watch your consistency grow day by day.</p>
         </div>
-        <div class="feat-card" onclick="switchTab('stats', document.querySelectorAll('.tab-btn')[3]); openApp();"
-          style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('stats')" style="cursor:pointer">
           <div class="feat-icon">📊</div>
           <h3>Progress Charts</h3>
           <p>Beautiful bar and line charts show your habit completion over time at a glance.</p>
         </div>
-        <div class="feat-card" onclick="switchTab('weekly', document.querySelectorAll('.tab-btn')[1]); openApp();"
-          style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('weekly')" style="cursor:pointer">
           <div class="feat-icon">📅</div>
           <h3>Weekly View</h3>
           <p>See your entire week for each habit in a clean grid. Spot patterns instantly.</p>
         </div>
-        <div class="feat-card" onclick="switchTab('monthly', document.querySelectorAll('.tab-btn')[2]); openApp();"
-          style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('monthly')" style="cursor:pointer">
           <div class="feat-icon">🗓️</div>
           <h3>Monthly Calendar</h3>
           <p>Color-coded calendar view shows your best months and where you can improve.</p>
         </div>
-        <div class="feat-card" onclick="openApp(); openModal();" style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('today'); openModal();" style="cursor:pointer">
           <div class="feat-icon">🎯</div>
           <h3>Custom Habits</h3>
           <p>Add any habit with a custom emoji and name. Build your personal system your way.</p>
         </div>
-        <div class="feat-card" onclick="openApp()" style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('today')" style="cursor:pointer">
           <div class="feat-icon">💾</div>
           <h3>Auto-Save</h3>
           <p>Everything saves automatically to your browser. No account, no cloud, no privacy concerns.</p>
         </div>
-        <div class="feat-card" onclick="openApp()" style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('today')" style="cursor:pointer">
           <div class="feat-icon">📱</div>
           <h3>Works Everywhere</h3>
           <p>Fully responsive on mobile, tablet, and desktop. Works in any browser on any device.</p>
         </div>
-        <div class="feat-card" onclick="openApp()" style="cursor:pointer">
+        <div class="feat-card" onclick="openApp('today')" style="cursor:pointer">
           <div class="feat-icon">💯</div>
           <h3>Completely Free</h3>
           <p>No hidden fees, no processing charges, no subscriptions. Free now, free forever.</p>
@@ -2554,11 +2561,13 @@
     }
 
     // ─── OPEN APP ───────────────────────────────────────
-    function openApp() {
+    function openApp(targetTab = 'today') {
       document.getElementById('landing').style.display = 'none';
       document.getElementById('app').style.display = 'block';
       localStorage.setItem('hw_view', 'app');
       renderAll();
+      const tabBtn = document.querySelector(`.tab-btn[data-tab="${targetTab}"]`) || document.querySelector(`.tab-btn[data-tab="today"]`);
+      if (tabBtn) switchTab(targetTab, tabBtn);
     }
 
     // ─── GREETING ───────────────────────────────────────
