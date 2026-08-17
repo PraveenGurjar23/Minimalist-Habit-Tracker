@@ -3087,8 +3087,22 @@
       }
     }
 
-    // Sound FX (Pops and Beeps)
-    function playPopSound(freq = 600, duration = 0.08) {
+    // ─── HIGH-QUALITY REALISTIC SOUND ENGINE ───────────
+    let currentAudioElement = null;
+
+    const AMBIENT_AUDIO_URLS = {
+      rain: 'https://cdn.freesound.org/previews/518/518872_6142149-lq.mp3',     // Gentle Rain
+      wind: 'https://cdn.freesound.org/previews/442/442340_8874836-lq.mp3',     // Soft Whispering Wind
+      beach: 'https://cdn.freesound.org/previews/415/415209_5121236-lq.mp3',    // Ocean Waves
+      birds: 'https://cdn.freesound.org/previews/530/530415_11459520-lq.mp3',   // Forest Birds Singing
+      crickets: 'https://cdn.freesound.org/previews/484/484344_5121236-lq.mp3', // Night Crickets
+      cafe: 'https://cdn.freesound.org/previews/415/415208_5121236-lq.mp3',     // Cozy Cafe Ambience
+      fire: 'https://cdn.freesound.org/previews/484/484343_5121236-lq.mp3',     // Fireplace Crackle
+      white: 'https://cdn.freesound.org/previews/368/368688_6702656-lq.mp3'    // Deep Focus White Noise
+    };
+
+    // Tactile iOS / macOS Style UI Pop & Click FX
+    function playPopSound(freq = 750, duration = 0.05) {
       try {
         initAudioContext();
         if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -3096,9 +3110,9 @@
         const gain = audioCtx.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(freq / 2, audioCtx.currentTime + duration);
-        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.4, audioCtx.currentTime + duration);
+        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
@@ -3106,6 +3120,7 @@
       } catch (e) {}
     }
 
+    // Rich Marimba / Chime Success Bell
     function playSuccessChime() {
       try {
         initAudioContext();
@@ -3114,53 +3129,73 @@
         notes.forEach((freq, idx) => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.12);
-          gain.gain.setValueAtTime(0.2, audioCtx.currentTime + idx * 0.12);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.12 + 0.4);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.1);
+          gain.gain.setValueAtTime(0.25, audioCtx.currentTime + idx * 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.1 + 0.5);
           osc.connect(gain);
           gain.connect(audioCtx.destination);
-          osc.start(audioCtx.currentTime + idx * 0.12);
-          osc.stop(audioCtx.currentTime + idx * 0.12 + 0.4);
+          osc.start(audioCtx.currentTime + idx * 0.1);
+          osc.stop(audioCtx.currentTime + idx * 0.1 + 0.5);
         });
       } catch (e) {}
     }
 
-    // Ambient Sound Generator (Procedural White Noise & Filters)
+    // Hyper-Realistic Ambient Audio Player
     function changeAmbientSound(soundType) {
-      playPopSound(450);
+      playPopSound(520, 0.05);
+
+      if (currentAudioElement) {
+        currentAudioElement.pause();
+        currentAudioElement.currentTime = 0;
+        currentAudioElement = null;
+      }
+
+      if (soundType === 'off' || !AMBIENT_AUDIO_URLS[soundType]) return;
+
+      const audio = new Audio(AMBIENT_AUDIO_URLS[soundType]);
+      audio.loop = true;
+      audio.crossOrigin = 'anonymous';
+      const volEl = document.getElementById('ambientVolume');
+      audio.volume = volEl ? parseFloat(volEl.value) : 0.5;
+
+      audio.play().catch(err => {
+        // Fallback to organic procedural synth if offline/blocked
+        playSynthAmbientFallback(soundType);
+      });
+      currentAudioElement = audio;
+    }
+
+    function setAmbientVolume(vol) {
+      if (currentAudioElement) {
+        currentAudioElement.volume = parseFloat(vol);
+      }
+      if (ambientGainNode) {
+        ambientGainNode.gain.value = parseFloat(vol);
+      }
+    }
+
+    function playSynthAmbientFallback(soundType) {
       try {
         initAudioContext();
         if (audioCtx.state === 'suspended') audioCtx.resume();
-
         if (ambientSourceNode) {
           ambientSourceNode.stop();
-          ambientSourceNode.disconnect();
           ambientSourceNode = null;
         }
-
-        if (soundType === 'off') return;
 
         const bufferSize = audioCtx.sampleRate * 2;
         const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
         const output = buffer.getChannelData(0);
-
-        for (let i = 0; i < bufferSize; i++) {
-          output[i] = Math.random() * 2 - 1;
-        }
+        for (let i = 0; i < bufferSize; i++) { output[i] = Math.random() * 2 - 1; }
 
         const whiteNoise = audioCtx.createBufferSource();
         whiteNoise.buffer = buffer;
         whiteNoise.loop = true;
 
         const filter = audioCtx.createBiquadFilter();
-        if (soundType === 'rain') { filter.type = 'lowpass'; filter.frequency.value = 1000; }
-        else if (soundType === 'wind') { filter.type = 'bandpass'; filter.frequency.value = 400; filter.Q.value = 3; }
-        else if (soundType === 'beach') { filter.type = 'lowpass'; filter.frequency.value = 800; }
-        else if (soundType === 'birds') { filter.type = 'highpass'; filter.frequency.value = 2000; }
-        else if (soundType === 'crickets') { filter.type = 'bandpass'; filter.frequency.value = 3500; filter.Q.value = 5; }
-        else if (soundType === 'cafe' || soundType === 'fire') { filter.type = 'lowpass'; filter.frequency.value = 600; }
-        else { filter.type = 'lowpass'; filter.frequency.value = 1200; }
+        filter.type = soundType === 'rain' ? 'lowpass' : soundType === 'wind' ? 'bandpass' : 'lowpass';
+        filter.frequency.value = soundType === 'rain' ? 900 : soundType === 'wind' ? 350 : 700;
 
         if (!ambientGainNode) {
           ambientGainNode = audioCtx.createGain();
@@ -3173,13 +3208,7 @@
         filter.connect(ambientGainNode);
         whiteNoise.start();
         ambientSourceNode = whiteNoise;
-      } catch (e) {}
-    }
-
-    function setAmbientVolume(vol) {
-      if (ambientGainNode) {
-        ambientGainNode.gain.value = parseFloat(vol);
-      }
+      } catch(e) {}
     }
 
     // Environment Time-of-Day Sky
