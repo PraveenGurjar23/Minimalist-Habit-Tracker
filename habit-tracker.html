@@ -1510,6 +1510,316 @@
         text-align: center;
       }
     }
+
+    /* ── FOCUS GARDEN & ENVIRONMENT STYLES ── */
+    .garden-card {
+      background: var(--card);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Environment Sky Gradients */
+    .sky-container {
+      position: relative;
+      height: 320px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background 1.5s ease, color 0.5s ease;
+    }
+    .sky-morning {
+      background: linear-gradient(180deg, #ffedd5 0%, #fed7aa 40%, #bae6fd 100%);
+      color: #7c2d12;
+    }
+    .sky-afternoon {
+      background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 50%, #e0f2fe 100%);
+      color: #0369a1;
+    }
+    .sky-evening {
+      background: linear-gradient(180deg, #4c1d95 0%, #831843 45%, #f97316 100%);
+      color: #fff;
+    }
+    .sky-night {
+      background: linear-gradient(180deg, #020617 0%, #0f172a 60%, #1e1b4b 100%);
+      color: #f8fafc;
+    }
+
+    /* Celestial Elements & Sun/Moon/Stars */
+    .celestial-body {
+      position: absolute;
+      top: 35px;
+      right: 45px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      transition: all 1s ease;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    }
+    .sun-body {
+      background: radial-gradient(circle, #fef08a 0%, #facc15 100%);
+      box-shadow: 0 0 40px #fde047;
+    }
+    .moon-body {
+      background: radial-gradient(circle, #f8fafc 0%, #cbd5e1 100%);
+      box-shadow: 0 0 25px rgba(248, 250, 252, 0.6);
+    }
+
+    .stars-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background-image: radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+                        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                        radial-gradient(1.5px 1.5px at 150px 40px, #fff, rgba(0,0,0,0)),
+                        radial-gradient(2px 2px at 250px 90px, #fff, rgba(0,0,0,0)),
+                        radial-gradient(1.5px 1.5px at 320px 120px, #fff, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 350px 200px;
+    }
+    .sky-night .stars-layer { opacity: 0.8; }
+
+    /* Canvas Tree Renderer */
+    .tree-canvas-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin-bottom: 10px;
+      z-index: 2;
+    }
+    canvas#treeCanvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Mode Pill Switches */
+    .mode-switch-bar {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      padding: 4px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      margin-bottom: 16px;
+    }
+    [data-theme="dark"] .mode-switch-bar {
+      background: rgba(15, 23, 42, 0.4);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .mode-pill {
+      padding: 6px 16px;
+      border-radius: 50px;
+      border: none;
+      background: transparent;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: inherit;
+      transition: all 0.25s;
+    }
+    .mode-pill.active {
+      background: var(--green);
+      color: #fff !important;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+
+    /* Timer Display */
+    .timer-readout {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      z-index: 2;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    .timer-ms {
+      font-size: 1.4rem;
+      opacity: 0.8;
+      font-weight: 700;
+    }
+
+    /* Controls Bar */
+    .garden-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .ctrl-btn {
+      padding: 12px 26px;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .ctrl-btn-primary {
+      background: var(--green);
+      color: #fff;
+    }
+    .ctrl-btn-primary:hover {
+      background: #15803d;
+      transform: translateY(-2px);
+    }
+    .ctrl-btn-stop {
+      background: #ef4444;
+      color: #fff;
+    }
+    .ctrl-btn-stop:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+    }
+    .ctrl-btn-secondary {
+      background: var(--bg3);
+      color: var(--text);
+    }
+    .ctrl-btn-secondary:hover {
+      background: var(--border);
+    }
+
+    /* Ambient Audio Section */
+    .ambient-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg2);
+      padding: 14px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .ambient-select {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Habit Quick Focus Button */
+    .focus-btn {
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: var(--green);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: auto;
+      margin-right: 6px;
+    }
+    .focus-btn:hover {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    /* Zen Fullscreen Mode */
+    body.zen-mode #app > nav,
+    body.zen-mode .dash-header,
+    body.zen-mode .stats-cards,
+    body.zen-mode footer {
+      display: none !important;
+    }
+    body.zen-mode .sky-container {
+      height: 80vh !important;
+      border-radius: 24px;
+    }
+    .zen-exit-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: none;
+    }
+    body.zen-mode .zen-exit-btn {
+      display: block;
+    }
+
+    /* Forest Heatmap */
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .heatmap-cell {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text3);
+    }
+    .heatmap-cell.l1 { background: #bbf7d0; color: #166534; }
+    .heatmap-cell.l2 { background: #4ade80; color: #14532d; }
+    .heatmap-cell.l3 { background: #16a34a; color: #fff; }
+    .heatmap-cell.l4 { background: #15803d; color: #fff; }
+
+    /* Shop Modal & Items */
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .shop-item {
+      background: var(--bg2);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .shop-item:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+    .shop-item.equipped {
+      border-color: var(--green);
+      background: var(--green-pale);
+    }
+    .shop-icon { font-size: 2.2rem; margin-bottom: 6px; }
+    .shop-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; }
+    .shop-cost { font-size: 0.8rem; color: #d97706; font-weight: 700; }
   </style>
 </head>
 
@@ -1889,18 +2199,21 @@
       <button class="tab-btn" data-tab="weekly" onclick="switchTab('weekly',this)">Weekly</button>
       <button class="tab-btn" data-tab="monthly" onclick="switchTab('monthly',this)">Monthly</button>
       <button class="tab-btn" data-tab="stats" onclick="switchTab('stats',this)">Stats</button>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme" style="margin-left: auto;">
-        <svg class="sun-icon" viewBox="0 0 24 24">
-          <path
-            d="M12 7a5 5 0 100 10 5 5 0 000-10zM2 12h2M20 12h2M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 4.93l-1.41 1.41M4.93 17.66l-1.41 1.41" />
-        </svg>
-        <svg class="moon-icon" viewBox="0 0 24 24">
-          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-        </svg>
-      </button>
-      <button class="tab-btn"
-        onclick="goHome()"
-        style="color:var(--text3);font-size:.8rem;margin-left:8px">🏠</button>
+      <button class="tab-btn" data-tab="garden" onclick="switchTab('garden',this)" style="background:var(--green-pale); color:var(--green); font-weight:700;">Focus Garden 🌱</button>
+      <div style="margin-left: auto; display:flex; align-items:center; gap:6px;">
+        <button class="tab-btn" onclick="exportDataJSON()" title="Backup Data (JSON)" style="font-size:0.78rem; padding:5px 10px;">💾 Backup</button>
+        <button class="tab-btn" onclick="importDataJSON()" title="Restore Data (JSON)" style="font-size:0.78rem; padding:5px 10px;">📥 Restore</button>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <path
+              d="M12 7a5 5 0 100 10 5 5 0 000-10zM2 12h2M20 12h2M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 4.93l-1.41 1.41M4.93 17.66l-1.41 1.41" />
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+        </button>
+        <button class="tab-btn" onclick="goHome()" style="color:var(--text3);font-size:.8rem;">🏠</button>
+      </div>
     </nav>
 
     <div class="app-content">
@@ -1998,6 +2311,151 @@
           <div class="chart-title">Completion by Day of Week</div>
           <canvas id="weekdayChart" height="100"></canvas>
         </div>
+      </div>
+
+      <!-- FOCUS GARDEN -->
+      <div id="tab-garden" class="app-inner fade-in" style="display:none">
+        <button class="zen-exit-btn" onclick="toggleZenMode()">Exit Zen Mode ✕</button>
+
+        <div class="dash-header">
+          <div>
+            <div class="dash-greeting" style="font-size:1.3rem">Focus Garden & Virtual Forest 🌱</div>
+            <div class="dash-date">Grow your virtual tree by staying focused in real life.</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <button class="ctrl-btn ctrl-btn-secondary" onclick="openShopModal()" style="padding:7px 16px; font-size:0.85rem;">
+              🪙 <span id="coinBalanceDisplay">0</span> Coins • Shop
+            </button>
+            <button class="ctrl-btn ctrl-btn-secondary" onclick="toggleZenMode()" style="padding:7px 16px; font-size:0.85rem;">
+              🧘 Zen Mode
+            </button>
+          </div>
+        </div>
+
+        <!-- Garden Canvas Card with Dynamic Environment Sky -->
+        <div class="garden-card">
+          <div class="sky-container sky-afternoon" id="skyContainer">
+            <div class="stars-layer"></div>
+            <div class="celestial-body sun-body" id="celestialBody"></div>
+
+            <div class="mode-switch-bar">
+              <button class="mode-pill active" id="pillCountdown" onclick="setTimerMode('countdown')">⏳ Countdown (25m)</button>
+              <button class="mode-pill" id="pillStopwatch" onclick="setTimerMode('stopwatch')">⏱️ Freehand Stopwatch</button>
+            </div>
+
+            <!-- Canvas Tree Display -->
+            <div class="tree-canvas-wrap">
+              <canvas id="treeCanvas" width="220" height="220"></canvas>
+            </div>
+
+            <!-- Timer Display -->
+            <div class="timer-readout" id="timerDisplay">25:00</div>
+          </div>
+
+          <!-- Controls Bar -->
+          <div class="garden-controls">
+            <button class="ctrl-btn ctrl-btn-primary" id="btnStartFocus" onclick="toggleFocusTimer()">
+              ▶️ Start Focus
+            </button>
+            <button class="ctrl-btn ctrl-btn-stop" id="btnStopFocus" onclick="stopAndHarvestTree()" style="display:none">
+              ⏹️ Stop & Harvest
+            </button>
+
+            <!-- Linked Habit Selector -->
+            <select class="ambient-select" id="linkedHabitSelect" style="max-width:180px;">
+              <option value="">(Optional Habit Link)</option>
+            </select>
+
+            <!-- Focus Strictness -->
+            <select class="ambient-select" id="strictnessSelect" onchange="playPopSound()">
+              <option value="casual">🛡️ Casual Mode (Pause on tab switch)</option>
+              <option value="strict">🔥 Strict Mode (Tree withers on tab switch)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Ambient Soundscapes Bar -->
+        <div class="ambient-bar">
+          <span style="font-weight:700; font-size:0.88rem; display:flex; align-items:center; gap:6px;">
+            🎵 Ambient Audio:
+          </span>
+          <select class="ambient-select" id="ambientSoundSelect" onchange="changeAmbientSound(this.value)">
+            <option value="off">🔇 Off</option>
+            <option value="rain">🌧️ Gentle Rain</option>
+            <option value="wind">🍃 Whispering Wind</option>
+            <option value="beach">🌊 Ocean Waves & Beach</option>
+            <option value="birds">🌲 Forest Birds</option>
+            <option value="crickets">🦗 Night Crickets</option>
+            <option value="cafe">☕ Cozy Café Ambience</option>
+            <option value="fire">🔥 Crackling Fireplace</option>
+            <option value="white">📻 Deep White Noise</option>
+          </select>
+
+          <div style="display:flex; align-items:center; gap:8px; margin-left:auto;">
+            <span style="font-size:0.78rem; color:var(--text2); font-weight:600;">Volume:</span>
+            <input type="range" id="ambientVolume" min="0" max="1" step="0.05" value="0.5" style="width:90px;" oninput="setAmbientVolume(this.value)">
+          </div>
+        </div>
+
+        <!-- Environment Sky Override Controls -->
+        <div class="chart-card" style="padding:16px 20px; margin-bottom:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+            <div style="font-weight:700; font-size:0.9rem;">🌅 Environment Time-of-Day Sky:</div>
+            <div style="display:flex; gap:8px;">
+              <button class="mode-pill active" id="skyBtnAuto" onclick="setSkyOverride('auto')">⚡ Real-Time Auto</button>
+              <button class="mode-pill" id="skyBtnMorning" onclick="setSkyOverride('morning')">🌅 Morning</button>
+              <button class="mode-pill" id="skyBtnAfternoon" onclick="setSkyOverride('afternoon')">☀️ Afternoon</button>
+              <button class="mode-pill" id="skyBtnEvening" onclick="setSkyOverride('evening')">🌇 Evening</button>
+              <button class="mode-pill" id="skyBtnNight" onclick="setSkyOverride('night')">🌙 Night</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Focus Goal Ring & Stats Heatmap -->
+        <div class="stats-cards">
+          <div class="stats-card">
+            <div class="stats-card-label">TODAY'S FOCUS TARGET</div>
+            <div class="stats-card-val" id="todayFocusMins">0 m</div>
+            <div class="stats-card-sub">Daily Goal: 120 min</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card-label">TOTAL TREES GROWN</div>
+            <div class="stats-card-val" id="totalTreesGrown">🌲 0</div>
+            <div class="stats-card-sub">Successful focus sessions</div>
+          </div>
+        </div>
+
+        <!-- Focus Activity Heatmap -->
+        <div class="chart-card">
+          <div class="chart-title">30-Day Forest Focus Heatmap 📊</div>
+          <div class="heatmap-grid" id="forestHeatmap"></div>
+        </div>
+
+        <!-- My Forest Grid Gallery -->
+        <div class="chart-card">
+          <div class="chart-title">My Focus Forest Gallery 🌳</div>
+          <div id="forestGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(70px, 1fr)); gap:12px; text-align:center; padding:10px 0;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Garden Shop Modal -->
+  <div class="modal-overlay" id="shopModalOverlay" onclick="if(event.target===this)closeShopModal()">
+    <div class="modal" style="max-width:500px;">
+      <h3>🛒 Focus Garden Shop</h3>
+      <p style="font-size:0.85rem; color:var(--text2); margin-bottom:16px;">
+        Spend your earned Focus Coins to unlock unique plant species!
+      </p>
+
+      <div style="font-weight:700; color:var(--green); font-size:1rem; margin-bottom:12px;">
+        Your Balance: 🪙 <span id="shopCoinBalance">0</span> Coins
+      </div>
+
+      <div class="shop-grid" id="shopGrid"></div>
+
+      <div class="modal-btns" style="margin-top:20px;">
+        <button class="btn btn-green" onclick="closeShopModal()" style="width:100%;">Close Shop</button>
       </div>
     </div>
   </div>
@@ -2165,6 +2623,7 @@
         </div>
       </div>
       ${streak > 0 ? `<div class="streak-badge">🔥 ${streak}</div>` : ''}
+      <button class="focus-btn" onclick="event.stopPropagation();launchFocusForHabit('${h.id}')" title="Start Focus Session">🌱 Focus</button>
       <button class="del-btn" onclick="event.stopPropagation();deleteHabit('${h.id}')">🗑</button>
     </div>`;
       }).join('');
@@ -2409,6 +2868,8 @@
       if (tab === 'weekly') renderWeekly();
       if (tab === 'monthly') { populateMonthSelect(); renderMonthly(); }
       if (tab === 'stats') renderStats();
+      if (tab === 'garden') renderGardenView();
+      try { playPopSound(500); } catch(e) {}
     }
 
     // ─── CONFETTI ───────────────────────────────────────
@@ -2570,6 +3031,596 @@
         weekdayChart.options.scales.y.grid.color = gridColor;
         weekdayChart.update();
       }
+    }
+
+    // ─── FOCUS GARDEN & SOUND ENGINE SYSTEM ───────────
+    let focusCoins = parseInt(localStorage.getItem('hw_coins') || '0');
+    let forestHistory = JSON.parse(localStorage.getItem('hw_forest') || '[]');
+    let unlockedPlants = JSON.parse(localStorage.getItem('hw_unlocked_plants') || '["pine"]');
+    let equippedPlant = localStorage.getItem('hw_equipped_plant') || 'pine';
+
+    const PLANT_SPECIES = {
+      pine: { name: 'Pine Tree', icon: '🌲', cost: 0, color: '#16a34a' },
+      cherry: { name: 'Cherry Blossom', icon: '🌸', cost: 50, color: '#ec4899' },
+      oak: { name: 'Golden Oak', icon: '🌳', cost: 100, color: '#d97706' },
+      bonsai: { name: 'Zen Bonsai', icon: '🪴', cost: 150, color: '#059669' },
+      cactus: { name: 'Crystal Cactus', icon: '🌵', cost: 200, color: '#0284c7' }
+    };
+
+    // Timer state
+    let timerMode = 'countdown'; // 'countdown' or 'stopwatch'
+    let timerRunning = false;
+    let timerInterval = null;
+    let timerStartTime = 0;
+    let elapsedMs = 0;
+    let countdownTargetMs = 25 * 60 * 1000; // 25 mins default
+    let selectedLinkedHabit = '';
+    let skyOverride = 'auto'; // 'auto', 'morning', 'afternoon', 'evening', 'night'
+
+    // Web Audio Synthesizer for UI sound effects & ambient noise
+    let audioCtx = null;
+    let ambientGainNode = null;
+    let ambientSourceNode = null;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    // Sound FX (Pops and Beeps)
+    function playPopSound(freq = 600, duration = 0.08) {
+      try {
+        initAudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq / 2, audioCtx.currentTime + duration);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playSuccessChime() {
+      try {
+        initAudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.12);
+          gain.gain.setValueAtTime(0.2, audioCtx.currentTime + idx * 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.12 + 0.4);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(audioCtx.currentTime + idx * 0.12);
+          osc.stop(audioCtx.currentTime + idx * 0.12 + 0.4);
+        });
+      } catch (e) {}
+    }
+
+    // Ambient Sound Generator (Procedural White Noise & Filters)
+    function changeAmbientSound(soundType) {
+      playPopSound(450);
+      try {
+        initAudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        if (ambientSourceNode) {
+          ambientSourceNode.stop();
+          ambientSourceNode.disconnect();
+          ambientSourceNode = null;
+        }
+
+        if (soundType === 'off') return;
+
+        const bufferSize = audioCtx.sampleRate * 2;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = buffer.getChannelData(0);
+
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+
+        const whiteNoise = audioCtx.createBufferSource();
+        whiteNoise.buffer = buffer;
+        whiteNoise.loop = true;
+
+        const filter = audioCtx.createBiquadFilter();
+        if (soundType === 'rain') { filter.type = 'lowpass'; filter.frequency.value = 1000; }
+        else if (soundType === 'wind') { filter.type = 'bandpass'; filter.frequency.value = 400; filter.Q.value = 3; }
+        else if (soundType === 'beach') { filter.type = 'lowpass'; filter.frequency.value = 800; }
+        else if (soundType === 'birds') { filter.type = 'highpass'; filter.frequency.value = 2000; }
+        else if (soundType === 'crickets') { filter.type = 'bandpass'; filter.frequency.value = 3500; filter.Q.value = 5; }
+        else if (soundType === 'cafe' || soundType === 'fire') { filter.type = 'lowpass'; filter.frequency.value = 600; }
+        else { filter.type = 'lowpass'; filter.frequency.value = 1200; }
+
+        if (!ambientGainNode) {
+          ambientGainNode = audioCtx.createGain();
+          const volEl = document.getElementById('ambientVolume');
+          ambientGainNode.gain.value = volEl ? parseFloat(volEl.value) : 0.5;
+          ambientGainNode.connect(audioCtx.destination);
+        }
+
+        whiteNoise.connect(filter);
+        filter.connect(ambientGainNode);
+        whiteNoise.start();
+        ambientSourceNode = whiteNoise;
+      } catch (e) {}
+    }
+
+    function setAmbientVolume(vol) {
+      if (ambientGainNode) {
+        ambientGainNode.gain.value = parseFloat(vol);
+      }
+    }
+
+    // Environment Time-of-Day Sky
+    function updateEnvironmentSky() {
+      const skyEl = document.getElementById('skyContainer');
+      const celestialEl = document.getElementById('celestialBody');
+      if (!skyEl || !celestialEl) return;
+
+      let mode = skyOverride;
+      if (mode === 'auto') {
+        const hour = new Date().getHours();
+        if (hour >= 6 && hour < 12) mode = 'morning';
+        else if (hour >= 12 && hour < 17) mode = 'afternoon';
+        else if (hour >= 17 && hour < 20) mode = 'evening';
+        else mode = 'night';
+      }
+
+      skyEl.className = 'sky-container sky-' + mode;
+      if (mode === 'night') {
+        celestialEl.className = 'celestial-body moon-body';
+      } else {
+        celestialEl.className = 'celestial-body sun-body';
+      }
+
+      // Update override buttons state
+      ['Auto', 'Morning', 'Afternoon', 'Evening', 'Night'].forEach(m => {
+        const btn = document.getElementById('skyBtn' + m);
+        if (btn) {
+          if ((m.toLowerCase() === skyOverride) || (skyOverride === 'auto' && m === 'Auto')) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        }
+      });
+    }
+
+    function setSkyOverride(mode) {
+      playPopSound(500);
+      skyOverride = mode;
+      updateEnvironmentSky();
+    }
+
+    // Mode Selector (Countdown vs Freehand Stopwatch)
+    function setTimerMode(mode) {
+      if (timerRunning) return;
+      playPopSound(550);
+      timerMode = mode;
+      const pCount = document.getElementById('pillCountdown');
+      const pStop = document.getElementById('pillStopwatch');
+
+      if (mode === 'countdown') {
+        pCount.classList.add('active');
+        pStop.classList.remove('active');
+        document.getElementById('timerDisplay').textContent = formatMsToTime(countdownTargetMs, false);
+      } else {
+        pStop.classList.add('active');
+        pCount.classList.remove('active');
+        document.getElementById('timerDisplay').innerHTML = '00:00:00.<span class="timer-ms">00</span>';
+      }
+      renderCanvasTree(0);
+    }
+
+    // Time Format Helper (HH:MM:SS.ms)
+    function formatMsToTime(ms, showMs = true) {
+      const totalSec = Math.floor(ms / 1000);
+      const hours = Math.floor(totalSec / 3600);
+      const mins = Math.floor((totalSec % 3600) / 60);
+      const secs = totalSec % 60;
+      const millis = Math.floor((ms % 1000) / 10);
+
+      const pad = n => String(n).padStart(2, '0');
+      const timeStr = (hours > 0 ? `${pad(hours)}:` : '') + `${pad(mins)}:${pad(secs)}`;
+      if (showMs) {
+        return `${timeStr}.<span class="timer-ms">${pad(millis)}</span>`;
+      }
+      return timeStr;
+    }
+
+    // Timer / Stopwatch Controls
+    function toggleFocusTimer() {
+      playPopSound(650);
+      if (timerRunning) {
+        pauseFocusTimer();
+      } else {
+        startFocusTimer();
+      }
+    }
+
+    function startFocusTimer() {
+      initAudioContext();
+      timerRunning = true;
+      timerStartTime = performance.now() - elapsedMs;
+
+      document.getElementById('btnStartFocus').innerHTML = '⏸️ Pause';
+      document.getElementById('btnStopFocus').style.display = 'inline-flex';
+
+      timerInterval = setInterval(() => {
+        const now = performance.now();
+        elapsedMs = now - timerStartTime;
+
+        if (timerMode === 'countdown') {
+          const remaining = Math.max(0, countdownTargetMs - elapsedMs);
+          document.getElementById('timerDisplay').innerHTML = formatMsToTime(remaining, true);
+          const progress = Math.min(1, elapsedMs / countdownTargetMs);
+          renderCanvasTree(progress);
+
+          if (remaining <= 0) {
+            completeFocusSession(true);
+          }
+        } else {
+          // Freehand Stopwatch mode
+          document.getElementById('timerDisplay').innerHTML = formatMsToTime(elapsedMs, true);
+          // Growth milestones for stopwatch: 5m = 20%, 15m = 40%, 30m = 70%, 60m+ = 100%
+          const mins = elapsedMs / (60 * 1000);
+          const progress = Math.min(1, mins / 60);
+          renderCanvasTree(progress);
+        }
+      }, 30);
+    }
+
+    function pauseFocusTimer() {
+      timerRunning = false;
+      clearInterval(timerInterval);
+      document.getElementById('btnStartFocus').innerHTML = '▶️ Resume';
+    }
+
+    function stopAndHarvestTree() {
+      playPopSound(400);
+      if (!confirm('Harvest and save your focus tree now?')) return;
+      completeFocusSession(false);
+    }
+
+    function completeFocusSession(isFinishedCountdown = false) {
+      timerRunning = false;
+      clearInterval(timerInterval);
+
+      const minsFocused = Math.max(1, Math.floor(elapsedMs / (60 * 1000)));
+      const earnedCoins = Math.max(5, minsFocused * 2);
+
+      focusCoins += earnedCoins;
+      localStorage.setItem('hw_coins', focusCoins);
+
+      // Record tree in forest history
+      const treeRecord = {
+        id: Date.now().toString(),
+        plant: equippedPlant,
+        minutes: minsFocused,
+        date: todayKey(),
+        mode: timerMode,
+        status: 'grown'
+      };
+      forestHistory.push(treeRecord);
+      localStorage.setItem('hw_forest', JSON.stringify(forestHistory));
+
+      // Auto-check linked habit if selected
+      const selHabit = document.getElementById('linkedHabitSelect').value;
+      if (selHabit) {
+        const k = todayKey();
+        if (!logs[k]) logs[k] = {};
+        logs[k][selHabit] = true;
+        save();
+      }
+
+      playSuccessChime();
+      launchConfetti();
+      showToast(`🎉 Focus complete! Earned 🪙 ${earnedCoins} Coins!`);
+
+      // Reset timer display
+      elapsedMs = 0;
+      document.getElementById('btnStartFocus').innerHTML = '▶️ Start Focus';
+      document.getElementById('btnStopFocus').style.display = 'none';
+
+      if (timerMode === 'countdown') {
+        document.getElementById('timerDisplay').textContent = formatMsToTime(countdownTargetMs, false);
+      } else {
+        document.getElementById('timerDisplay').innerHTML = '00:00:00.<span class="timer-ms">00</span>';
+      }
+
+      renderCanvasTree(0);
+      renderGardenView();
+    }
+
+    // Procedural Tree Canvas Renderer
+    function renderCanvasTree(progress = 0, isWithered = false) {
+      const canvas = document.getElementById('treeCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const pInfo = PLANT_SPECIES[equippedPlant] || PLANT_SPECIES.pine;
+
+      // Draw Soil / Pot
+      ctx.fillStyle = '#78350f';
+      ctx.beginPath();
+      ctx.ellipse(110, 195, 60, 16, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#a16207';
+      ctx.beginPath();
+      ctx.ellipse(110, 192, 54, 12, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (isWithered) {
+        // Draw withered twig
+        ctx.strokeStyle = '#451a03';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(110, 190);
+        ctx.lineTo(105, 140);
+        ctx.lineTo(95, 120);
+        ctx.stroke();
+        return;
+      }
+
+      // Seed / Sprout stage (0 - 20%)
+      if (progress < 0.2) {
+        ctx.fillStyle = '#22c55e';
+        ctx.beginPath();
+        ctx.arc(110, 185 - progress * 50, 6, 0, Math.PI * 2);
+        ctx.fill();
+        return;
+      }
+
+      // Trunk growth
+      const trunkHeight = 30 + progress * 70;
+      ctx.strokeStyle = '#543310';
+      ctx.lineWidth = 8 * Math.max(0.5, progress);
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(110, 190);
+      ctx.lineTo(110, 190 - trunkHeight);
+      ctx.stroke();
+
+      // Foliage / Canopy (20% - 100%)
+      const foliageScale = Math.max(0.2, (progress - 0.15) / 0.85);
+      const topY = 190 - trunkHeight;
+
+      ctx.fillStyle = pInfo.color;
+      if (equippedPlant === 'pine') {
+        ctx.beginPath();
+        ctx.moveTo(110, topY - 45 * foliageScale);
+        ctx.lineTo(110 - 35 * foliageScale, topY + 20 * foliageScale);
+        ctx.lineTo(110 + 35 * foliageScale, topY + 20 * foliageScale);
+        ctx.closePath();
+        ctx.fill();
+      } else if (equippedPlant === 'cherry') {
+        ctx.beginPath();
+        ctx.arc(110, topY - 10, 35 * foliageScale, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fbcfe8';
+        ctx.beginPath();
+        ctx.arc(100, topY - 18, 15 * foliageScale, 0, Math.PI * 2);
+        ctx.arc(125, topY - 8, 12 * foliageScale, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Oak / Bonsai / Cactus
+        ctx.beginPath();
+        ctx.arc(110, topY - 15, 38 * foliageScale, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Focus Protection (Tab switch visibility change)
+    document.addEventListener('visibilitychange', () => {
+      if (timerRunning && document.hidden) {
+        const mode = document.getElementById('strictnessSelect').value;
+        if (mode === 'casual') {
+          pauseFocusTimer();
+          showToast('⏸️ Timer paused because you left the page');
+        } else if (mode === 'strict') {
+          timerRunning = false;
+          clearInterval(timerInterval);
+          renderCanvasTree(0, true);
+          showToast('🥀 Tree withered because you left the browser tab in Strict Mode!');
+        }
+      }
+    });
+
+    // Quick Focus Launch from Habit Card
+    function launchFocusForHabit(habitId) {
+      switchTab('garden', document.querySelector('.tab-btn[data-tab="garden"]'));
+      selectedLinkedHabit = habitId;
+      const sel = document.getElementById('linkedHabitSelect');
+      if (sel) sel.value = habitId;
+      showToast('🌱 Pre-selected habit for focus session!');
+    }
+
+    // Shop Modal Functions
+    function openShopModal() {
+      playPopSound(500);
+      document.getElementById('shopCoinBalance').textContent = focusCoins;
+      const grid = document.getElementById('shopGrid');
+
+      grid.innerHTML = Object.keys(PLANT_SPECIES).map(key => {
+        const item = PLANT_SPECIES[key];
+        const isUnlocked = unlockedPlants.includes(key);
+        const isEquipped = equippedPlant === key;
+
+        return `
+          <div class="shop-item ${isEquipped ? 'equipped' : ''}" onclick="buyOrEquipPlant('${key}')">
+            <div class="shop-icon">${item.icon}</div>
+            <div class="shop-name">${item.name}</div>
+            <div class="shop-cost">
+              ${isEquipped ? '✅ Equipped' : isUnlocked ? 'Equip' : `🪙 ${item.cost}`}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('shopModalOverlay').classList.add('open');
+    }
+
+    function closeShopModal() {
+      document.getElementById('shopModalOverlay').classList.remove('open');
+    }
+
+    function buyOrEquipPlant(key) {
+      const item = PLANT_SPECIES[key];
+      if (!unlockedPlants.includes(key)) {
+        if (focusCoins < item.cost) {
+          showToast('⚠️ Not enough coins to unlock this plant!');
+          return;
+        }
+        focusCoins -= item.cost;
+        unlockedPlants.push(key);
+        localStorage.setItem('hw_coins', focusCoins);
+        localStorage.setItem('hw_unlocked_plants', JSON.stringify(unlockedPlants));
+        showToast(`🎉 Unlocked ${item.name}!`);
+      }
+
+      equippedPlant = key;
+      localStorage.setItem('hw_equipped_plant', key);
+      playSuccessChime();
+      openShopModal();
+      renderGardenView();
+    }
+
+    // Zen Fullscreen Mode Toggle
+    function toggleZenMode() {
+      playPopSound(450);
+      document.body.classList.toggle('zen-mode');
+    }
+
+    // JSON Data Export & Import
+    function exportDataJSON() {
+      playPopSound(600);
+      const data = {
+        habits,
+        logs,
+        notes,
+        coins: focusCoins,
+        forest: forestHistory,
+        unlockedPlants,
+        equippedPlant,
+        exportDate: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `HabitWork_Backup_${todayKey()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('💾 Backup file downloaded!');
+    }
+
+    function importDataJSON() {
+      playPopSound(600);
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'application/json';
+      input.onchange = e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = event => {
+          try {
+            const imported = JSON.parse(event.target.result);
+            if (imported.habits) habits = imported.habits;
+            if (imported.logs) logs = imported.logs;
+            if (imported.notes) notes = imported.notes;
+            if (imported.coins) focusCoins = imported.coins;
+            if (imported.forest) forestHistory = imported.forest;
+            if (imported.unlockedPlants) unlockedPlants = imported.unlockedPlants;
+            if (imported.equippedPlant) equippedPlant = imported.equippedPlant;
+
+            save();
+            localStorage.setItem('hw_coins', focusCoins);
+            localStorage.setItem('hw_forest', JSON.stringify(forestHistory));
+            localStorage.setItem('hw_unlocked_plants', JSON.stringify(unlockedPlants));
+            localStorage.setItem('hw_equipped_plant', equippedPlant);
+
+            renderAll();
+            renderGardenView();
+            showToast('📥 Data successfully restored!');
+          } catch (err) {
+            showToast('⚠️ Invalid backup file format');
+          }
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }
+
+    // Render Focus Garden View & Heatmap
+    function renderGardenView() {
+      updateEnvironmentSky();
+      document.getElementById('coinBalanceDisplay').textContent = focusCoins;
+
+      // Populate Habit select
+      const habitSel = document.getElementById('linkedHabitSelect');
+      if (habitSel) {
+        habitSel.innerHTML = '<option value="">(Optional Habit Link)</option>' +
+          habits.map(h => `<option value="${h.id}">${h.emoji} ${h.name}</option>`).join('');
+        if (selectedLinkedHabit) habitSel.value = selectedLinkedHabit;
+      }
+
+      // Stats
+      const todayTrees = forestHistory.filter(t => t.date === todayKey() && t.status === 'grown');
+      const todayMins = todayTrees.reduce((acc, curr) => acc + (curr.minutes || 0), 0);
+      document.getElementById('todayFocusMins').textContent = `${todayMins} m`;
+      document.getElementById('totalTreesGrown').textContent = `🌲 ${forestHistory.filter(t => t.status === 'grown').length}`;
+
+      // Forest Grid Gallery
+      const fGrid = document.getElementById('forestGrid');
+      if (!forestHistory.length) {
+        fGrid.innerHTML = '<div style="grid-column:1/-1; color:var(--text3); padding:20px;">No trees grown yet. Complete a focus session to plant your first tree! 🌱</div>';
+      } else {
+        fGrid.innerHTML = forestHistory.slice(-28).reverse().map(t => {
+          const icon = (PLANT_SPECIES[t.plant] || PLANT_SPECIES.pine).icon;
+          return `
+            <div style="background:var(--bg2); padding:10px; border-radius:12px; border:1px solid var(--border);">
+              <div style="font-size:1.6rem;">${t.status === 'grown' ? icon : '🥀'}</div>
+              <div style="font-size:0.75rem; font-weight:700; color:var(--green);">${t.minutes}m</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 30-Day Forest Heatmap
+      const hGrid = document.getElementById('forestHeatmap');
+      if (hGrid) {
+        let html = '';
+        for (let i = 27; i >= 0; i--) {
+          const d = new Date(); d.setDate(d.getDate() - i);
+          const k = dateKey(d);
+          const dayMins = forestHistory.filter(t => t.date === k && t.status === 'grown').reduce((acc, curr) => acc + (curr.minutes || 0), 0);
+          let cls = '';
+          if (dayMins > 60) cls = 'l4';
+          else if (dayMins > 30) cls = 'l3';
+          else if (dayMins > 15) cls = 'l2';
+          else if (dayMins > 0) cls = 'l1';
+
+          html += `<div class="heatmap-cell ${cls}" title="${k}: ${dayMins} mins focus">${d.getDate()}</div>`;
+        }
+        hGrid.innerHTML = html;
+      }
+
+      renderCanvasTree(0);
     }
 
     initTheme();
