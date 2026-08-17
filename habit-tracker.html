@@ -2346,8 +2346,18 @@
             <div class="celestial-body sun-body" id="celestialBody"></div>
 
             <div class="mode-switch-bar">
-              <button class="mode-pill active" id="pillCountdown" onclick="setTimerMode('countdown')">⏳ Countdown (25m)</button>
+              <button class="mode-pill active" id="pillCountdown" onclick="setTimerMode('countdown')">⏳ Countdown</button>
               <button class="mode-pill" id="pillStopwatch" onclick="setTimerMode('stopwatch')">⏱️ Freehand Stopwatch</button>
+            </div>
+
+            <!-- Countdown Duration Presets -->
+            <div id="countdownPresetsBar" style="display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; justify-content:center; z-index:2;">
+              <button class="mode-pill" id="preset5" onclick="setCountdownMinutes(5)">5m</button>
+              <button class="mode-pill" id="preset10" onclick="setCountdownMinutes(10)">10m</button>
+              <button class="mode-pill active" id="preset25" onclick="setCountdownMinutes(25)">25m</button>
+              <button class="mode-pill" id="preset45" onclick="setCountdownMinutes(45)">45m</button>
+              <button class="mode-pill" id="preset60" onclick="setCountdownMinutes(60)">60m</button>
+              <button class="mode-pill" id="presetCustom" onclick="promptCustomCountdown()">⚙️ Custom</button>
             </div>
 
             <!-- Canvas Tree Display -->
@@ -3213,6 +3223,41 @@
       updateEnvironmentSky();
     }
 
+    // Countdown Preset Selector (5m, 10m, 25m, 45m, 60m, Custom)
+    function setCountdownMinutes(mins) {
+      if (timerRunning) return;
+      playPopSound(500);
+      countdownTargetMs = mins * 60 * 1000;
+      if (timerMode === 'countdown') {
+        document.getElementById('timerDisplay').textContent = formatMsToTime(countdownTargetMs, false);
+      }
+      [5, 10, 25, 45, 60].forEach(m => {
+        const btn = document.getElementById('preset' + m);
+        if (btn) btn.classList.toggle('active', m === mins);
+      });
+      const cBtn = document.getElementById('presetCustom');
+      if (cBtn && ![5, 10, 25, 45, 60].includes(mins)) {
+        cBtn.classList.add('active');
+        cBtn.textContent = `⚙️ ${mins}m`;
+      } else if (cBtn) {
+        cBtn.classList.remove('active');
+        cBtn.textContent = '⚙️ Custom';
+      }
+    }
+
+    function promptCustomCountdown() {
+      if (timerRunning) return;
+      playPopSound(500);
+      const input = prompt('Enter custom countdown duration in minutes (1 to 1440):', '30');
+      if (!input) return;
+      const mins = parseInt(input.trim());
+      if (isNaN(mins) || mins <= 0 || mins > 1440) {
+        showToast('⚠️ Please enter a valid number of minutes (1 to 1440)');
+        return;
+      }
+      setCountdownMinutes(mins);
+    }
+
     // Mode Selector (Countdown vs Freehand Stopwatch)
     function setTimerMode(mode) {
       if (timerRunning) return;
@@ -3220,14 +3265,17 @@
       timerMode = mode;
       const pCount = document.getElementById('pillCountdown');
       const pStop = document.getElementById('pillStopwatch');
+      const pBar = document.getElementById('countdownPresetsBar');
 
       if (mode === 'countdown') {
         pCount.classList.add('active');
         pStop.classList.remove('active');
+        if (pBar) pBar.style.display = 'flex';
         document.getElementById('timerDisplay').textContent = formatMsToTime(countdownTargetMs, false);
       } else {
         pStop.classList.add('active');
         pCount.classList.remove('active');
+        if (pBar) pBar.style.display = 'none';
         document.getElementById('timerDisplay').innerHTML = '00:00:00.<span class="timer-ms">00</span>';
       }
       renderCanvasTree(0);
